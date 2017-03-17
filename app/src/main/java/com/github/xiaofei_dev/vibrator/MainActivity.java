@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        vibrateMode = mSharedPreferences.getInt("MODE",0);
+        vibrateMode = mSharedPreferences.getInt("MODE",VibratorUtil.INTERRUPT);
         isChecked = mSharedPreferences.getBoolean("IS_CHECKED",false);
         progress = mSharedPreferences.getInt("PROGRESS",5);
         setVibratePattern(progress);
@@ -125,14 +125,14 @@ public class MainActivity extends AppCompatActivity {
                 if(item.isChecked()){
                     isChecked = false;
                     item.setChecked(isChecked);
-                    vibrateMode = 0;
+                    vibrateMode = VibratorUtil.INTERRUPT;
                     editor.putBoolean("IS_CHECKED",isChecked);
                     editor.putInt("MODE", vibrateMode);
                     setBottomBarVisibility();
                 }else {
                     isChecked = true;
                     item.setChecked(isChecked);
-                    vibrateMode = 1;
+                    vibrateMode = VibratorUtil.KEEP;
                     editor.putBoolean("IS_CHECKED",isChecked);
                     editor.putInt("MODE", vibrateMode);
                     setBottomBarVisibility();
