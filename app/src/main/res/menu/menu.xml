@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/keep"
+        android:title="@string/keep"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/theme"
+        android:title="@string/theme"/>
+
+    <item
+        android:id="@+id/setting"
+        android:title="@string/more"/>
+</menu>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Vibrator</string>
+    <string name="start_vibrate">点击任意位置开始震动</string>
+    <string name="stop_vibrate">点击任意位置停止震动</string>
+
+    <string name="remote_start_vibrate">点击开始震动</string>
+    <string name="remote_stop_vibrate">点击停止震动</string>
+
+    <string name="keep">持续振动</string>
+    <string name="theme">主题</string>
+    <string name="more">关于</string>
+    
+    <string name="magenta">基佬紫</string>
+    <string name="red">姨妈红</string>
+    <string name="pink">少女粉</string>
+    <string name="yellow">跳蛋黄</string>
+
+    <string name="close">取消</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--主视图布局-->
+<RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:id="@+id/bk"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryDark">
+     <android.support.design.widget.AppBarLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+          <android.support.v7.widget.Toolbar
+              android:id="@+id/toolbar"
+              android:layout_width="match_parent"
+              android:layout_height="?attr/actionBarSize"
+              android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+              <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+     </android.support.design.widget.AppBarLayout>
+     <com.balysv.materialripple.MaterialRippleLayout
+         android:id="@+id/ripple"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         app:mrl_rippleFadeDuration="500"
+         app:mrl_rippleDuration="500"
+         app:mrl_rippleBackground="@android:color/transparent">
+          <TextView
+              android:id="@+id/vibrate"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:layout_centerInParent="true"
+              android:padding="20dp"
+              android:text="@string/start_vibrate"
+              android:textSize="25sp"
+              android:layout_above="@+id/bottom_bar"
+              android:background="@android:color/transparent"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+     </com.balysv.materialripple.MaterialRippleLayout>
+
+     <LinearLayout
+         android:id="@+id/bottom_bar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:padding="6dp"
+         android:background="#7d000000">
+          <TextView
+              android:id="@+id/text1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="强度"
+              android:paddingBottom="12dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:paddingTop="12dp"/>
+          <SeekBar
+              android:id="@+id/seek_bar"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:paddingBottom="12dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:paddingTop="12dp"
+              />
+          <TextView
+              android:id="@+id/text2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="大"
+              android:paddingBottom="12dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:paddingTop="12dp"/>
+     </LinearLayout>
+
+</RelativeLayout>
