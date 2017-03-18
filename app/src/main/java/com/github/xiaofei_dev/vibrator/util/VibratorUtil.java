@@ -1,7 +1,5 @@
-package com.github.xiaofei_dev.vibrator;
+package com.github.xiaofei_dev.vibrator.util;
 
-import android.app.Service;
-import android.media.AudioAttributes;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -19,12 +17,12 @@ public class VibratorUtil {
     //振动模式为持续
     public static final int KEEP = 1;
 
-    private Vibrator mVibrator;
+    private final Vibrator mVibrator;
 
     //通过设置一个小时时长来模拟持续不停地震动
     private long mDuration = 1000*60*60;
     public static long[] mPattern = {0,0,0};
-    private int mRepeat = 0;
+    private final int mRepeat = 0;
     private boolean isVibrate;
 
     public VibratorUtil(Vibrator vibrator) {
@@ -39,7 +37,7 @@ public class VibratorUtil {
         return isVibrate;
     }
 
-    public void setVibrate(boolean vibrate) {
+    private void setVibrate(boolean vibrate) {
         isVibrate = vibrate;
     }
 

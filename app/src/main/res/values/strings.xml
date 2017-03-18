@@ -9,11 +9,33 @@
     <string name="keep">持续振动</string>
     <string name="theme">主题</string>
     <string name="more">关于</string>
-    
+
     <string name="magenta">基佬紫</string>
     <string name="red">姨妈红</string>
     <string name="pink">少女粉</string>
     <string name="yellow">跳蛋黄</string>
 
+    <string name="bottom_bar_left">强度</string>
+    <string name="bottom_bar_right">大</string>
+
     <string name="close">取消</string>
+
+    <string name="aboutDeveloper">作者：酷安@xiaofei_dev</string>
+    <string name="aboutXBB_Title">关于本应用：</string>
+
+    <string name="aboutXBB_OpenSource">
+        ▶ 需要详细了解此应用，点此访问<a href="">项目托管地址</a>。
+    </string>
+    <string name="aboutXBB_ScoreAndFeedback">
+        ▶ 觉得应用做得不错，您可以点此<a href="">评分或反馈</a>。
+    </string>
+    <string name="aboutXBB_Donate">
+        ▶ 如果您非常喜欢本应用，也可以<a href="">捐赠</a>一下作者。
+    </string>
+
+    <string name="openSourceLink">https://github.com/xiaofei-dev/Vibrator</string>
+    <string name="donateToast">十分感谢！作者支付宝账号(微信同)已复制到剪贴板</string>
+    <string name="alipay">15853186920</string>
+
+    <string name="about">关于</string>
 </resources>

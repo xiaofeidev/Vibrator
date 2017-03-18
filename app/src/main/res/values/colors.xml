@@ -22,6 +22,9 @@
 
     <color name="textColor">#ffffff</color>
 
-    <color name="pressed">#47fafafa</color>
+    <color name="black">#1d1d1d</color>
+    <color name="whiteLow">#f0f0f0</color>
+
+    <color name="translucent">#7d000000</color>
 
 </resources>

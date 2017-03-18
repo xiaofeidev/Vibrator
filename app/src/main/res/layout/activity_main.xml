@@ -6,7 +6,7 @@
      android:id="@+id/bk"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
-    android:background="?attr/colorPrimaryDark">
+     android:background="?attr/colorPrimaryDark">
      <android.support.design.widget.AppBarLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
@@ -34,9 +34,10 @@
               android:padding="20dp"
               android:text="@string/start_vibrate"
               android:textSize="25sp"
+              android:typeface="monospace"
               android:layout_above="@+id/bottom_bar"
-              android:background="@android:color/transparent"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+              android:background="@android:color/transparent"/>
+              <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
 
      </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -51,7 +52,7 @@
               android:id="@+id/text1"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="强度"
+              android:text="@string/bottom_bar_left"
               android:paddingBottom="12dp"
               android:paddingLeft="12dp"
               android:paddingRight="12dp"
@@ -70,7 +71,7 @@
               android:id="@+id/text2"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="大"
+              android:text="@string/bottom_bar_right"
               android:paddingBottom="12dp"
               android:paddingLeft="12dp"
               android:paddingRight="12dp"

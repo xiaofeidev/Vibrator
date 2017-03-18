@@ -29,6 +29,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.xiaofei_dev.vibrator.util.VibratorUtil;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,13 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private VibratorUtil mVibratorUtil;
     private TextView hint;
     private LinearLayout bottomBar;
-    private SeekBar mSeekBar;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor editor;
     private MyReceiver myReceiver;
-    RemoteViews mRemoteViews;
-    NotificationManager nm;
-    Notification notification;
+    private RemoteViews mRemoteViews;
+    private NotificationManager nm;
+    private Notification notification;
 
     private int vibrateMode;
     private int intensity;
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
                 break;
             case R.id.setting:
-                break;
+                startActivity(new Intent(this,AboutActivity.class));
             default:
                 break;
         }
@@ -164,9 +165,9 @@ public class MainActivity extends AppCompatActivity {
     private class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction() == "android.intent.action.SCREEN_OFF" && isInApp){
+            if(intent.getAction().equals("android.intent.action.SCREEN_OFF") && isInApp){
                 mVibratorUtil.vibrate(vibrateMode);
-            }else if(intent.getAction() == "com.github.xiaofei_dev.vibrator.action"
+            }else if(intent.getAction().equals("com.github.xiaofei_dev.vibrator.action")
                     && mVibratorUtil.isVibrate())
             {
                 isInApp = false;
@@ -174,7 +175,8 @@ public class MainActivity extends AppCompatActivity {
                 hint.setText(R.string.start_vibrate);
                 setBottomBarVisibility();
                 mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_start_vibrate));
-            }else if(intent.getAction() == "com.github.xiaofei_dev.vibrator.action"
+                nm.notify(0, notification);//更新通知
+            }else if(intent.getAction().equals("com.github.xiaofei_dev.vibrator.action")
                     && !mVibratorUtil.isVibrate())
             {
                 isInApp = true;
@@ -183,14 +185,15 @@ public class MainActivity extends AppCompatActivity {
                 //bottomBar.setVisibility(View.GONE);
                 setBottomBarVisibility();
                 mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_stop_vibrate));
-            }else if(intent.getAction() == "com.github.xiaofei_dev.vibrator.close"){
+                nm.notify(0, notification);//更新通知
+            }else if(intent.getAction().equals("com.github.xiaofei_dev.vibrator.close")){
                     isInApp = false;
                     mVibratorUtil.stopVibrate();
                     hint.setText(R.string.start_vibrate);
                     setBottomBarVisibility();
                     nm.cancelAll();
             }
-            nm.notify(0, notification);
+
         }
     }
 
@@ -207,9 +210,9 @@ public class MainActivity extends AppCompatActivity {
         bottomBar = (LinearLayout) findViewById(R.id.bottom_bar);
         setBottomBarVisibility();
 
-        mSeekBar = (SeekBar) findViewById(R.id.seek_bar);
-        mSeekBar.setProgress(progress);
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
+        seekBar.setProgress(progress);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 intensity = progress;
@@ -339,8 +342,6 @@ public class MainActivity extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(this, 0, i,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(intent);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
 
         mRemoteViews = new RemoteViews(getPackageName(), R.layout.notification);
 
@@ -354,7 +355,10 @@ public class MainActivity extends AppCompatActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         mRemoteViews.setOnClickPendingIntent(R.id.close,close);
 
-        builder.setContent(mRemoteViews)
+        builder.setContentIntent(intent)
+        .setSmallIcon(R.drawable.ic_vibration)
+        .setOngoing(true)
+        .setContent(mRemoteViews)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
 

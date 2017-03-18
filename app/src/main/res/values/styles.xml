@@ -47,4 +47,8 @@
         <item name="android:clickable">true</item>
     </style>
 
+    <style name="blackTextColor">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>
