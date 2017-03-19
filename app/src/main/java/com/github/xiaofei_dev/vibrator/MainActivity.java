@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private long mPressedTime = 0;
-    //private Vibrator mVibrator;
     private VibratorUtil mVibratorUtil;
     private TextView hint;
     private LinearLayout bottomBar;
