@@ -37,9 +37,29 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
+    <style name="AppTheme_Green" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_Green</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Green</item>
+        <item name="colorAccent">@color/colorAccent_Green</item>
+        <item name="android:navigationBarColor">@color/navigationBarColor_Green</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="AppTheme_Blue" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_Blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Blue</item>
+        <item name="colorAccent">@color/colorAccent_Blue</item>
+        <item name="android:navigationBarColor">@color/navigationBarColor_Blue</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+
+
     <style name="colorPickerStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_height">60dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:gravity">center</item>
@@ -49,6 +69,19 @@
 
     <style name="blackTextColor">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Dialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <!--<item name="colorAccent">@color/posColor</item>-->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundDimAmount">0.2</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
 </resources>

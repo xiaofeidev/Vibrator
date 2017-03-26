@@ -46,4 +46,19 @@ public class OpenUtil {
             }
         }
     }
+
+    //打开自己的支付宝付款链接
+    public static void alipayDonate(Context context) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        String payUrl = "https://qr.alipay.com/FKX06496G2PCRYR0LXR7BC";
+        intent.setData(Uri.parse("alipayqr://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=" + payUrl));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        } else {
+            intent.setData(Uri.parse(payUrl));
+            context.startActivity(intent);
+        }
+    }
 }

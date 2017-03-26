@@ -1,18 +1,11 @@
 package com.github.xiaofei_dev.vibrator;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.github.xiaofei_dev.vibrator.MainActivity;
-import com.github.xiaofei_dev.vibrator.R;
 import com.github.xiaofei_dev.vibrator.util.OpenUtil;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener{
@@ -53,13 +46,14 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                         view.getContext());
                 break;
             case R.id.itemDonate:
-                String alipay = getString(R.string.alipay);
+                /*String alipay = getString(R.string.alipay);
                 ClipboardManager myClipboard =
                         (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);  //实例化剪切板服务
                 ClipData myClip = ClipData.newPlainText("donate", alipay);
                 myClipboard.setPrimaryClip(myClip);
                 Toast.makeText(getApplicationContext(), getString(R.string.donateToast),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG).show();*/
+                OpenUtil.alipayDonate(this);
                 break;
         }
 

@@ -42,8 +42,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical|center"
             android:text="@string/app_name"
-            android:clickable="true"
-            android:background="@drawable/button_state_selector"/>
+            android:clickable="true"/>
 
     </RelativeLayout>
 
@@ -69,24 +68,6 @@
                 android:text="@string/aboutXBB_Title"
                 android:textStyle="bold"/>
 
-            <!--<TextView
-                android:id="@+id/itemHelp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state_selector"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_Help"/>
-
-            <TextView
-                android:id="@+id/itemUpdateHistrory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state_selector"
-                android:clickable="true"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_UpdateHistory"/>-->
 
             <TextView
                 android:id="@+id/itemOpenSource"

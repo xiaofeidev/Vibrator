@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 break;
             case R.id.theme:
-                AlertDialog dialog = new AlertDialog.Builder(this)
+                AlertDialog dialog = new AlertDialog.Builder(this,R.style.Dialog)
                         .setTitle(getString(R.string.theme))
                         .setPositiveButton(getString(R.string.close),
                                 new DialogInterface.OnClickListener() {
@@ -288,6 +288,14 @@ public class MainActivity extends AppCompatActivity {
                         spe.putInt("theme",R.style.AppTheme_Yellow);
                         Log.d(TAG, "onClick: yellow");
                         break;
+                    case R.id.green:
+                        spe.putInt("theme",R.style.AppTheme_Green);
+                        Log.d(TAG, "onClick: green");
+                        break;
+                    case R.id.blue:
+                        spe.putInt("theme",R.style.AppTheme_Blue);
+                        Log.d(TAG, "onClick: blue");
+                        break;
                     default:
                         break;
                 }
@@ -302,6 +310,8 @@ public class MainActivity extends AppCompatActivity {
         rootView.findViewById(R.id.red).setOnClickListener(clickListener);
         rootView.findViewById(R.id.pink).setOnClickListener(clickListener);
         rootView.findViewById(R.id.yellow).setOnClickListener(clickListener);
+        rootView.findViewById(R.id.green).setOnClickListener(clickListener);
+        rootView.findViewById(R.id.blue).setOnClickListener(clickListener);
 
         return rootView;
     }
@@ -320,6 +330,12 @@ public class MainActivity extends AppCompatActivity {
                 context.setTheme(themeId);
                 break;
             case R.style.AppTheme_Yellow:
+                context.setTheme(themeId);
+                break;
+            case R.style.AppTheme_Green:
+                context.setTheme(themeId);
+                break;
+            case R.style.AppTheme_Blue:
                 context.setTheme(themeId);
                 break;
             default:
