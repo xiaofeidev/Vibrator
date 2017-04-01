@@ -324,17 +324,9 @@ public class MainActivity extends AppCompatActivity {
 
         switch (themeId) {
             case R.style.AppTheme_Red:
-                context.setTheme(themeId);
-                break;
             case R.style.AppTheme_Pink:
-                context.setTheme(themeId);
-                break;
             case R.style.AppTheme_Yellow:
-                context.setTheme(themeId);
-                break;
             case R.style.AppTheme_Green:
-                context.setTheme(themeId);
-                break;
             case R.style.AppTheme_Blue:
                 context.setTheme(themeId);
                 break;

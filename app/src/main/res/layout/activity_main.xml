@@ -60,6 +60,7 @@
           <SeekBar
               android:id="@+id/seek_bar"
               android:layout_width="0dp"
+              android:max="50"
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:paddingBottom="12dp"
