@@ -7,11 +7,20 @@ android {
         applicationId "com.github.xiaofei_dev.vibrator"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.5.5"
+        versionCode 5
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+//            buildConfigField "boolean", "LOG_DEBUG", "true"
+////            debuggable true
+////            applicationIdSuffix ".debug"
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true //是否混淆
             shrinkResources true //是否去除无效的资源文件
@@ -29,5 +38,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.2.0'
-    compile 'com.balysv:material-ripple:1.0.2'
+//    compile 'com.balysv:material-ripple:1.0.2'
 }

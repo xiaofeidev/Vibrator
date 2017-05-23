@@ -1,4 +1,4 @@
-package com.github.xiaofei_dev.vibrator;
+package com.github.xiaofei_dev.vibrator.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.xiaofei_dev.vibrator.R;
 import com.github.xiaofei_dev.vibrator.util.OpenUtil;
 
-public class AboutActivity extends AppCompatActivity implements View.OnClickListener{
+public final class AboutActivity extends AppCompatActivity implements View.OnClickListener{
 
 
 

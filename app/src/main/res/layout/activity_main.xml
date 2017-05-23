@@ -18,28 +18,41 @@
               android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
               <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
      </android.support.design.widget.AppBarLayout>
-     <com.balysv.materialripple.MaterialRippleLayout
-         android:id="@+id/ripple"
+     <TextView
+         android:id="@+id/vibrate"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         app:mrl_rippleFadeDuration="500"
-         app:mrl_rippleDuration="500"
-         app:mrl_rippleBackground="@android:color/transparent">
-          <TextView
-              android:id="@+id/vibrate"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:layout_centerInParent="true"
-              android:padding="20dp"
-              android:text="@string/start_vibrate"
-              android:textSize="25sp"
-              android:typeface="monospace"
-              android:layout_above="@+id/bottom_bar"
-              android:background="@android:color/transparent"/>
-              <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+         android:gravity="center"
+         android:layout_centerInParent="true"
+         android:layout_marginTop="?attr/actionBarSize"
+         android:padding="20dp"
+         android:text="@string/start_vibrate"
+         android:textSize="25sp"
+         android:typeface="monospace"
+         android:layout_above="@+id/bottom_bar"
+         android:background="?attr/selectableItemBackgroundBorderless"/>
 
-     </com.balysv.materialripple.MaterialRippleLayout>
+     <!--<com.balysv.materialripple.MaterialRippleLayout-->
+     <!--android:id="@+id/ripple"-->
+     <!--android:layout_width="match_parent"-->
+     <!--android:layout_height="match_parent"-->
+     <!--app:mrl_rippleFadeDuration="500"-->
+     <!--app:mrl_rippleDuration="500"-->
+     <!--app:mrl_rippleBackground="@android:color/transparent">-->
+     <!--<TextView-->
+     <!--android:id="@+id/vibrate"-->
+     <!--android:layout_width="match_parent"-->
+     <!--android:layout_height="match_parent"-->
+     <!--android:gravity="center"-->
+     <!--android:layout_centerInParent="true"-->
+     <!--android:padding="20dp"-->
+     <!--android:text="@string/start_vibrate"-->
+     <!--android:textSize="25sp"-->
+     <!--android:typeface="monospace"-->
+     <!--android:layout_above="@+id/bottom_bar"-->
+     <!--android:background="@android:color/transparent"/>-->
+     <!--&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior"/>&ndash;&gt;-->
+     <!--</com.balysv.materialripple.MaterialRippleLayout>-->
 
      <LinearLayout
          android:id="@+id/bottom_bar"
@@ -47,11 +60,12 @@
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
          android:padding="6dp"
-         android:background="#7d000000">
+         android:background="@color/translucent">
           <TextView
               android:id="@+id/text1"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
               android:text="@string/bottom_bar_left"
               android:paddingBottom="12dp"
               android:paddingLeft="12dp"
@@ -60,18 +74,19 @@
           <SeekBar
               android:id="@+id/seek_bar"
               android:layout_width="0dp"
-              android:max="50"
               android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
               android:layout_weight="1"
               android:paddingBottom="12dp"
               android:paddingLeft="12dp"
               android:paddingRight="12dp"
               android:paddingTop="12dp"
-              />
+              android:max="40"/>
           <TextView
               android:id="@+id/text2"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
               android:text="@string/bottom_bar_right"
               android:paddingBottom="12dp"
               android:paddingLeft="12dp"

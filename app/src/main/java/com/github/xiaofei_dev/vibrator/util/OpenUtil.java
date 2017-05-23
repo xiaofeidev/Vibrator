@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-public class OpenUtil {
+public final class OpenUtil {
     public static void openApplicationMarket(String appPackageName, String marketPackageName,
                                              Context context) {
         try {

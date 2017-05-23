@@ -1,7 +1,6 @@
-package com.github.xiaofei_dev.vibrator;
+package com.github.xiaofei_dev.vibrator.ui;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -13,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,10 +29,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.xiaofei_dev.vibrator.R;
+import com.github.xiaofei_dev.vibrator.util.ToastUtil;
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil;
 
 
-public class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private MyReceiver myReceiver;
     private RemoteViews mRemoteViews;
-    private NotificationManager nm;
+    private NotificationManagerCompat nm;
     private Notification notification;
 
     private int vibrateMode;
@@ -79,33 +81,38 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction("com.github.xiaofei_dev.vibrator.close");
         myReceiver = new MyReceiver();
         registerReceiver(myReceiver,filter);
+        Log.d(TAG, "onCreate: ");
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        notification = null;
+//        nm.cancel(0);
+        if(nm != null){
+            nm.cancelAll();
+        }
+//        unregisterReceiver(myReceiver);
         if(myReceiver != null){
             unregisterReceiver(myReceiver);
             myReceiver = null;
-            if(nm != null){
-                nm.cancelAll();
-            }
         }
+        Log.d(TAG, "onDestroy: ");
     }
 
     @Override
     public void onBackPressed() {
-        long mNowTime = System.currentTimeMillis();//获取第一次按键时间
-
+        long mNowTime = System.currentTimeMillis();//记录本次按键时刻
         if((mNowTime - mPressedTime) > 1000){//比较两次按键时间差
             Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
             mPressedTime = mNowTime;
         }
         else{
             //退出程序
-            finish();
-            System.exit(0);
+            super.onBackPressed();
+//            finish();
+//            System.exit(0);
         }
     }
 
@@ -231,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //发出去通知
+        sendNotification();
+        mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_start_vibrate));
+        nm.notify(0, notification);
+
         hint = (TextView)findViewById(R.id.vibrate);
         hint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                     hint.setText(R.string.stop_vibrate);
                     //bottomBar.setVisibility(View.GONE);
                     setBottomBarVisibility();
-                    sendNotification();
+//                    sendNotification();
                     mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_stop_vibrate));
                 }else{
                     isInApp = false;
@@ -272,6 +284,11 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //若正在震动则不允许切换主题
+                if(mVibratorUtil.isVibrate()){
+                    ToastUtil.showToast(MainActivity.this,getString(R.string.not_allow));
+                    return;
+                }
                 SharedPreferences.Editor spe = getSharedPreferences("item", MODE_PRIVATE).edit();
                 switch (v.getId()) {
                     case R.id.magenta:
@@ -302,7 +319,9 @@ public class MainActivity extends AppCompatActivity {
 
                 spe.apply();
                 dialog.cancel();
-                restart();
+//                restart();
+                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+                recreate();
             }
         };
 
@@ -336,12 +355,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void restart() {
-        Intent intent = getIntent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
+//    private void restart() {
+//        Intent intent = getIntent();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+//        startActivity(intent);
+////        finish();
+//    }
 
     private void sendNotification(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
@@ -369,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
 
-        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm = NotificationManagerCompat.from(this);
         notification = builder.build();
         nm.notify(0, notification);
     }

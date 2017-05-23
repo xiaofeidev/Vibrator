@@ -8,7 +8,7 @@ import android.util.Log;
  * Created by Administrator on 2017/3/4.
  */
 //此类用于描述振动属性，即Vibrator类的方法参数值
-public class VibratorUtil {
+public final class VibratorUtil {
     private static final String TAG = "VibratorUtil";
 
     //振动模式为断续
