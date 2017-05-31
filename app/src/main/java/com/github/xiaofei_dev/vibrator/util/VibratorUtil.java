@@ -19,8 +19,8 @@ public final class VibratorUtil {
 
     private final Vibrator mVibrator;
 
-    //通过设置一个小时时长来模拟持续不停地震动
-    private long mDuration = 1000*60*60;
+    //通过设置24个小时时长来模拟持续不停地震动
+    private long mDuration = 1000*60*60*10;
     public static long[] mPattern = {0,0,0};
     private final int mRepeat = 0;
     private boolean isVibrate;
@@ -46,11 +46,11 @@ public final class VibratorUtil {
         Log.d(TAG, "vibrate:0 ");
         setVibrate(true);
         switch (mode){
-            case 0:
+            case INTERRUPT:
                 mVibrator.vibrate(mPattern,mRepeat);
                 Log.d(TAG, "vibrate:0 ");
                 break;
-            case 1:
+            case KEEP:
                 mVibrator.vibrate(mDuration);
                 break;
             default:

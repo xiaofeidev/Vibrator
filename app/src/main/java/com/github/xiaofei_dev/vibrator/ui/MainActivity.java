@@ -1,5 +1,7 @@
 package com.github.xiaofei_dev.vibrator.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,7 +15,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public final class MainActivity extends AppCompatActivity {
     private int progress;
     private boolean isInApp;
     private boolean isChecked;
+    private Animator mAnimator;
 
 
     @Override
@@ -71,6 +73,7 @@ public final class MainActivity extends AppCompatActivity {
         setVibratePattern(progress);
         editor =mSharedPreferences.edit();
 
+
         //mVibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         mVibratorUtil = new VibratorUtil((Vibrator) getSystemService(Service.VIBRATOR_SERVICE));
 
@@ -87,7 +90,6 @@ public final class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         notification = null;
 //        nm.cancel(0);
         if(nm != null){
@@ -98,7 +100,11 @@ public final class MainActivity extends AppCompatActivity {
             unregisterReceiver(myReceiver);
             myReceiver = null;
         }
-        Log.d(TAG, "onDestroy: ");
+//        if(mAnimator.isStarted()){
+//            mAnimator.cancel();
+//        }
+        mAnimator.cancel();
+        super.onDestroy();
     }
 
     @Override
@@ -110,6 +116,14 @@ public final class MainActivity extends AppCompatActivity {
         }
         else{
             //退出程序
+            if(mVibratorUtil.isVibrate()){
+                isInApp = false;
+                mVibratorUtil.stopVibrate();
+                hint.setText(R.string.start_vibrate);
+                //bottomBar.setVisibility(View.VISIBLE);
+                setBottomBarVisibility();
+                mAnimator.cancel();
+            }
             super.onBackPressed();
 //            finish();
 //            System.exit(0);
@@ -179,6 +193,7 @@ public final class MainActivity extends AppCompatActivity {
                 isInApp = false;
                 mVibratorUtil.stopVibrate();
                 hint.setText(R.string.start_vibrate);
+                mAnimator.cancel();
                 setBottomBarVisibility();
                 mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_start_vibrate));
                 nm.notify(0, notification);//更新通知
@@ -189,6 +204,7 @@ public final class MainActivity extends AppCompatActivity {
                 mVibratorUtil.vibrate(vibrateMode);
                 hint.setText(R.string.stop_vibrate);
                 //bottomBar.setVisibility(View.GONE);
+                mAnimator.start();
                 setBottomBarVisibility();
                 mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_stop_vibrate));
                 nm.notify(0, notification);//更新通知
@@ -196,6 +212,7 @@ public final class MainActivity extends AppCompatActivity {
                     isInApp = false;
                     mVibratorUtil.stopVibrate();
                     hint.setText(R.string.start_vibrate);
+                    mAnimator.cancel();
                     setBottomBarVisibility();
                     nm.cancelAll();
             }
@@ -253,6 +270,7 @@ public final class MainActivity extends AppCompatActivity {
                     hint.setText(R.string.stop_vibrate);
                     //bottomBar.setVisibility(View.GONE);
                     setBottomBarVisibility();
+                    mAnimator.start();
 //                    sendNotification();
                     mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_stop_vibrate));
                 }else{
@@ -261,12 +279,15 @@ public final class MainActivity extends AppCompatActivity {
                     hint.setText(R.string.start_vibrate);
                     //bottomBar.setVisibility(View.VISIBLE);
                     setBottomBarVisibility();
+                    mAnimator.cancel();
                     //nm.cancelAll();
                     mRemoteViews.setTextViewText(R.id.action,getString(R.string.remote_start_vibrate));
                 }
                 nm.notify(0, notification);
             }
         });
+        mAnimator = AnimatorInflater.loadAnimator(MainActivity.this,R.animator.anim_vibrate);
+        mAnimator.setTarget(hint);
     }
 
     private void setBottomBarVisibility(){
