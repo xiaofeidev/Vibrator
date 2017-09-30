@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.github.xiaofei_dev.vibrator.R;
 import com.github.xiaofei_dev.vibrator.util.OpenUtil;
 
 public final class AboutActivity extends AppCompatActivity implements View.OnClickListener{
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +59,10 @@ public final class AboutActivity extends AppCompatActivity implements View.OnCli
 
     private void setActionBar() {
         setTitle(getResources().getString(R.string.about));
-
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
-
 }
