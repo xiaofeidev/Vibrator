@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.zhy.android.percent.support.PercentLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="64dp"
     android:orientation="horizontal"
     android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        android:paddingStart="9dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:paddingEnd="14dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%h"
+        app:layout_widthPercent="100%h"
+        app:layout_paddingPercent="10%h"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_notification"/>
 
     <TextView
         android:id="@+id/action"
         android:layout_width="0dp"
-        android:layout_height="68dp"
-        android:gravity="center"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%h"
         android:layout_weight="1"
+        android:gravity="center"
         android:clickable="true"
-        android:textSize="16sp"
-        android:textColor="@color/gery"
-        tools:text="@string/remote_start_vibrate"/>
+        android:textColor="?android:attr/textColorPrimaryInverse"/>
+
 
     <ImageButton
         android:id="@+id/close"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:paddingStart="15dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%h"
+        app:layout_widthPercent="100%h"
+        app:layout_paddingPercent="12%h"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:src="@drawable/close"
         android:scaleType="centerInside"/>
 
-</LinearLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

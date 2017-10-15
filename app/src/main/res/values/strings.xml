@@ -28,13 +28,13 @@
     <string name="aboutXBB_Title">关于本应用：</string>
 
     <string name="aboutXBB_OpenSource">
-        ▶ 需要详细了解此应用，点此访问<a href="">项目托管地址</a>。
+        ▶ 需要获取源码，点此访问<a href="">项目托管地址</a>。
     </string>
     <string name="aboutXBB_ScoreAndFeedback">
-        ▶ 觉得应用做得不错，您可以点此<a href="">评分或反馈</a>。
+        ▶ 想对作者说点什么，点此<a href="">评分或反馈</a>。
     </string>
     <string name="aboutXBB_Donate">
-        ▶ 如果您非常喜欢本应用，也可以<a href="">捐赠</a>一下作者。
+        ▶ 非常喜欢本应用，也可以<a href="">捐赠</a>一下作者。
     </string>
 
     <string name="openSourceLink">https://github.com/xiaofei-dev/Vibrator</string>

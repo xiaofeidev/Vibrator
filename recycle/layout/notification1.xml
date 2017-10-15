@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="?attr/actionBarSize"
     android:orientation="horizontal"
     android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="68dp"
-        android:layout_height="68dp"
+        android:layout_height="match_parent"
         android:paddingStart="9dp"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
@@ -21,22 +21,22 @@
     <TextView
         android:id="@+id/action"
         android:layout_width="0dp"
-        android:layout_height="68dp"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="1"
         android:clickable="true"
-        android:textSize="16sp"
-        android:textColor="@color/gery"
-        tools:text="@string/remote_start_vibrate"/>
+        android:layout_weight="1"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        />
+
 
     <ImageButton
         android:id="@+id/close"
         android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:paddingStart="15dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
+        android:layout_height="match_parent"
+        android:paddingStart="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:src="@drawable/close"

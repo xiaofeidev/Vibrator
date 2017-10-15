@@ -227,7 +227,7 @@ public final class MainActivity extends AppCompatActivity {
 
     private void initViews(){
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_sort_white_36dp,null));
+//        mToolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_sort_white_36dp,null));
         setSupportActionBar(mToolbar);
 
         bottomBar = (LinearLayout) findViewById(R.id.bottom_bar);
@@ -406,7 +406,8 @@ public final class MainActivity extends AppCompatActivity {
         .setSmallIcon(R.drawable.ic_vibration)
         .setOngoing(true)
         .setContent(mRemoteViews)
-        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        .setPriority(NotificationCompat.PRIORITY_MAX);
 
 
         nm = NotificationManagerCompat.from(this);

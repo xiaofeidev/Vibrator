@@ -1,10 +1,10 @@
 package com.github.xiaofei_dev.vibrator.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.github.xiaofei_dev.vibrator.R;
 import com.github.xiaofei_dev.vibrator.util.OpenUtil;
 
@@ -13,12 +13,12 @@ public final class AboutActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainActivity.setTheme(this);
+//        MainActivity.setTheme(this);
         setContentView(R.layout.activity_about);
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        /*Toolbar mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
-        setActionBar();
+        setActionBar();*/
         findViewById(R.id.itemOpenSource).setOnClickListener(this);
         findViewById(R.id.itemScoreAndFeedback).setOnClickListener(this);
         findViewById(R.id.itemDonate).setOnClickListener(this);
@@ -57,12 +57,12 @@ public final class AboutActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void setActionBar() {
+    /*private void setActionBar() {
         setTitle(getResources().getString(R.string.about));
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

@@ -32,6 +32,7 @@
 
     <color name="black">#1d1d1d</color>
     <color name="whiteLow">#f0f0f0</color>
+    <color name="gery">#7e7e7e</color>
 
     <color name="translucent">#19000000</color>
     <!--<color name="translucent_white">#7d000000</color>-->

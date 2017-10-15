@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AboutActivity"
+            android:theme="@style/Dialog"
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
                   android:screenOrientation="portrait">
         </activity>
