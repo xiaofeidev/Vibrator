@@ -22,7 +22,7 @@ public final class VibratorUtil {
     //通过设置一个小时时长来模拟持续不停地震动
     private long mDuration = 1000*60*60;
     public static long[] mPattern = {0,0,0};
-    private long[] mPatternKeep = {0,mDuration,0,mDuration};
+    private long[] mPatternKeep = {1,1000 * 10,1,1000 * 10};
     private boolean isVibrate;
 
     public VibratorUtil(Vibrator vibrator) {
