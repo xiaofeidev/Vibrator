@@ -9,12 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="68dp"
+        android:layout_width="40dp"
         android:layout_height="68dp"
-        android:paddingStart="9dp"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
-        android:paddingEnd="14dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_notification"/>
 
@@ -31,12 +29,10 @@
 
     <ImageButton
         android:id="@+id/close"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="68dp"
-        android:paddingStart="15dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
+        android:paddingBottom="22dp"
+        android:paddingTop="22dp"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:src="@drawable/close"

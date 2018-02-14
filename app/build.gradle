@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.github.xiaofei_dev.vibrator"
         minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 12
-        versionName "1.8.7"
+        targetSdkVersion 27
+        versionCode 13
+        versionName "1.8.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,13 +32,26 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-//    compile 'com.zhy:percent-support-extends:1.1.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.3.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.zhy:percent-support-extends:1.1.1'
+    implementation 'com.android.support:appcompat-v7:27+'
+    implementation 'com.android.support:design:27+'
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //Anko （Kotlin 库）
+    implementation "org.jetbrains.anko:anko-common:$anko_version"
+    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
+    // Anko Layouts
+    implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
+    // sdk15, sdk19, sdk21, sdk23 are also available
+    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    implementation "org.jetbrains.anko:anko-support-v4:$anko_version"
+    // 主要为兼容一些控件事件的协程，不过协程coroutines目前还不是kotlin的正式内容
+    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
 //    compile 'com.balysv:material-ripple:1.0.2'
 }

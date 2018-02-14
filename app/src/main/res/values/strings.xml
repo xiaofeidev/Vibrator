@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Vibrator</string>
-    <string name="app_verdion">Vibrator v1.8.7</string>
+    <string name="app_verdion">Vibrator v1.8.8</string>
     <string name="start_vibrate">点击屏幕开始震动</string>
     <string name="stop_vibrate">点击屏幕停止震动</string>
 
@@ -29,7 +29,7 @@
     <string name="aboutXBB_Title">关于本应用：</string>
 
     <string name="aboutXBB_OpenSource">
-        ▶ 需要获取源码，点此访问<a href="">项目托管地址</a>。
+        ▶ 本应用已开源，点此访问<a href="">项目托管地址</a>。
     </string>
     <string name="aboutXBB_ScoreAndFeedback">
         ▶ 想对作者说点什么，点此<a href="">评分或反馈</a>。
