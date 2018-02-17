@@ -295,6 +295,7 @@ class MainActivity : AppCompatActivity() {
         channel.enableLights(false)
         channel.description = "按摩棒默认通知渠道"
         channel.setShowBadge(false)
+        channel.setSound(null, null)
         notificationManager.createNotificationChannel(channel)
     }
 
@@ -308,10 +309,10 @@ class MainActivity : AppCompatActivity() {
 
         mRemoteViews = RemoteViews(packageName, R.layout.notification)
 
-        val contral = PendingIntent.getBroadcast(this, 0,
+        val control = PendingIntent.getBroadcast(this, 0,
                 Intent("com.github.xiaofei_dev.vibrator.action"),
                 PendingIntent.FLAG_UPDATE_CURRENT)
-        mRemoteViews!!.setOnClickPendingIntent(R.id.action, contral)
+        mRemoteViews!!.setOnClickPendingIntent(R.id.action, control)
 
         val close = PendingIntent.getBroadcast(this, 1,
                 Intent("com.github.xiaofei_dev.vibrator.close"),
@@ -320,9 +321,12 @@ class MainActivity : AppCompatActivity() {
 
         builder.setContentIntent(intent)
                 .setSmallIcon(R.drawable.ic_vibration)
+                .setSound(null)
+                .setOnlyAlertOnce(true)//成功使通知声音只响一次！
                 .setOngoing(true)
                 .setContent(mRemoteViews)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC).priority = NotificationCompat.PRIORITY_MAX
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .priority = NotificationCompat.PRIORITY_DEFAULT
 
 
         nm = NotificationManagerCompat.from(this)
