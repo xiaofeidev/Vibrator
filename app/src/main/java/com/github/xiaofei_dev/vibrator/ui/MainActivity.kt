@@ -15,14 +15,12 @@ import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.extension.screenWidth
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 import com.github.xiaofei_dev.vibrator.singleton.Preference.isChecked
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mProgress
@@ -137,7 +135,26 @@ class MainActivity : AppCompatActivity() {
                 dialog.setView(getColorPickerView(dialog))
                 dialog.show()
             }
-            R.id.setting -> startActivity(Intent(this, AboutActivity::class.java))
+            R.id.discover ->{
+                val dialog = AlertDialog.Builder(this, R.style.Dialog)
+                        /*.setTitle(getString(R.string.discover))
+                        .setPositiveButton(getString(R.string.close)) {
+                            dialog, which -> dialog.cancel()
+                        }*/
+                        .create()
+                dialog.setView(getDiscoverView(dialog))
+                dialog.show()
+                //得到这个dialog界面的参数对象
+                val params:WindowManager.LayoutParams = dialog.getWindow().getAttributes();
+                //设置dialog的界面宽度
+                params.width = screenWidth/5 *4
+                //设置dialog高度为包裹内容
+                params.height =  WindowManager.LayoutParams.WRAP_CONTENT;
+                //设置dialog的重心
+                params.gravity = Gravity.CENTER;
+                dialog.window.attributes = params
+            }
+            R.id.about -> startActivity(Intent(this, AboutActivity::class.java))
             else -> {
             }
         }
@@ -242,9 +259,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getDiscoverView(dialog: AlertDialog): View{
+        val rootView = layoutInflater.inflate(R.layout.layout_discover, null)
+        /*val layoutParams:ViewGroup.LayoutParams =
+                ViewGroup.LayoutParams(dip(200), ViewGroup.LayoutParams.WRAP_CONTENT)
+        rootView.layoutParams = layoutParams*/
+        return rootView
+    }
+
     private fun getColorPickerView(dialog: AlertDialog): View {
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rootView = inflater.inflate(R.layout.color_picker, null)
+        val rootView = layoutInflater.inflate(R.layout.layout_color_picker, null)
 
         val clickListener = View.OnClickListener { v ->
             //若正在震动则不允许切换主题
@@ -307,7 +331,7 @@ class MainActivity : AppCompatActivity() {
         val intent = PendingIntent.getActivity(this, 0, i,
                 PendingIntent.FLAG_UPDATE_CURRENT)
 
-        mRemoteViews = RemoteViews(packageName, R.layout.notification)
+        mRemoteViews = RemoteViews(packageName, R.layout.layout_notification)
 
         val control = PendingIntent.getBroadcast(this, 0,
                 Intent("com.github.xiaofei_dev.vibrator.action"),

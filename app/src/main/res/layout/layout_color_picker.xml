@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+        <TextView
+            android:id="@+id/magenta"
+            style="@style/colorPickerStyle"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/magenta"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+
+        <TextView
+            android:id="@+id/red"
+            style="@style/colorPickerStyle"
+            android:background="@color/colorPrimary_Red"
+            android:text="@string/red"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+
+        <TextView
+            android:id="@+id/pink"
+            style="@style/colorPickerStyle"
+            android:background="@color/colorAccent_Pink"
+            android:text="@string/pink"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+
+        <TextView
+            android:id="@+id/yellow"
+            style="@style/colorPickerStyle"
+            android:background="@color/colorAccent_Yellow"
+            android:text="@string/yellow"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+        <TextView
+            android:id="@+id/green"
+            style="@style/colorPickerStyle"
+            android:background="@color/colorAccent_Green"
+            android:text="@string/green"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+        <TextView
+            android:id="@+id/blue"
+            style="@style/colorPickerStyle"
+            android:background="@color/colorAccent_Blue"
+            android:text="@string/blue"/>
+</LinearLayout>

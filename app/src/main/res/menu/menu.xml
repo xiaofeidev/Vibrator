@@ -10,6 +10,10 @@
         android:title="@string/theme"/>
 
     <item
-        android:id="@+id/setting"
+        android:id="@+id/discover"
+        android:title="@string/discover"/>
+
+    <item
+        android:id="@+id/about"
         android:title="@string/more"/>
 </menu>

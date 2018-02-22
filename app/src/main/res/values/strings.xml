@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Vibrator</string>
-    <string name="app_verdion">Vibrator v1.8.8</string>
+    <string name="app_verdion">Vibrator v1.9.0</string>
     <string name="start_vibrate">点击屏幕开始震动</string>
     <string name="stop_vibrate">点击屏幕停止震动</string>
 
@@ -9,10 +9,11 @@
 
     <string name="keep">持续振动</string>
     <string name="theme">主题</string>
+    <string name="discover">发现</string>
     <string name="more">关于</string>
 
     <string name="magenta">基佬紫</string>
-    <string name="red">姨妈红</string>
+    <string name="red">初夜红</string>
     <string name="pink">少女粉</string>
     <string name="yellow">跳蛋黄</string>
     <string name="green">原谅绿</string>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="种子搜索工具"
+        app:layout_marginTopPercent="15%w"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="关注微信公众号：每日优质搜罗"
+        app:layout_marginTopPercent="4%w"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:text="发送：1002"
+        app:layout_marginTopPercent="4%w"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="60%w"
+        app:layout_heightPercent="60%w"
+        android:layout_gravity="center_horizontal"
+        app:layout_marginTopPercent="14%w"
+        app:layout_marginBottomPercent="14%w"
+        android:src="@drawable/ic_public_qr_code"/>
+
+</com.zhy.android.percent.support.PercentLinearLayout>
+
