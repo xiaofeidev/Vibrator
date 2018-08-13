@@ -9,9 +9,9 @@
         android:id="@+id/theme"
         android:title="@string/theme"/>
 
-    <item
+    <!--<item
         android:id="@+id/discover"
-        android:title="@string/discover"/>
+        android:title="@string/discover"/>-->
 
     <item
         android:id="@+id/about"

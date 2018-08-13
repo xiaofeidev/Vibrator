@@ -135,12 +135,12 @@ class MainActivity : AppCompatActivity() {
                 dialog.setView(getColorPickerView(dialog))
                 dialog.show()
             }
-            R.id.discover ->{
+            /*R.id.discover ->{
                 val dialog = AlertDialog.Builder(this, R.style.Dialog)
-                        /*.setTitle(getString(R.string.discover))
+                        *//*.setTitle(getString(R.string.discover))
                         .setPositiveButton(getString(R.string.close)) {
                             dialog, which -> dialog.cancel()
-                        }*/
+                        }*//*
                         .create()
                 dialog.setView(getDiscoverView(dialog))
                 dialog.show()
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                 //设置dialog的重心
                 params.gravity = Gravity.CENTER;
                 dialog.window.attributes = params
-            }
+            }*/
             R.id.about -> startActivity(Intent(this, AboutActivity::class.java))
             else -> {
             }
@@ -172,7 +172,9 @@ class MainActivity : AppCompatActivity() {
                 mAnimator!!.cancel()
                 setBottomBarVisibility()
                 mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
-                nm!!.notify(0, mNotification)//更新通知
+                mNotification?.let {//更新通知
+                    nm!!.notify(0, it)
+                }
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && !mVibratorUtil!!.isVibrate) {
                 isInApp = true
                 mVibratorUtil!!.vibrate(mVibrateMode)
@@ -181,7 +183,9 @@ class MainActivity : AppCompatActivity() {
                 mAnimator!!.start()
                 setBottomBarVisibility()
                 mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
-                nm!!.notify(0, mNotification)//更新通知
+                mNotification?.let {//更新通知
+                    nm!!.notify(0, it)
+                }
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.close") {
                 isInApp = false
                 mVibratorUtil!!.stopVibrate()
@@ -224,7 +228,9 @@ class MainActivity : AppCompatActivity() {
         //发出去通知
         sendNotification()
         mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
-        nm!!.notify(0, mNotification)
+        mNotification?.let {//更新通知
+            nm!!.notify(0, it)
+        }
         textHint.setOnClickListener {
             if (!mVibratorUtil!!.isVibrate) {
                 isInApp = true
@@ -245,7 +251,9 @@ class MainActivity : AppCompatActivity() {
                 //nm.cancelAll();
                 mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
             }
-            nm!!.notify(0, mNotification)
+            mNotification?.let {//更新通知
+                nm!!.notify(0, it)
+            }
         }
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
         mAnimator!!.setTarget(textHint)
@@ -259,13 +267,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDiscoverView(dialog: AlertDialog): View{
+    /*private fun getDiscoverView(dialog: AlertDialog): View{
         val rootView = layoutInflater.inflate(R.layout.layout_discover, null)
-        /*val layoutParams:ViewGroup.LayoutParams =
+        *//*val layoutParams:ViewGroup.LayoutParams =
                 ViewGroup.LayoutParams(dip(200), ViewGroup.LayoutParams.WRAP_CONTENT)
-        rootView.layoutParams = layoutParams*/
+        rootView.layoutParams = layoutParams*//*
         return rootView
-    }
+    }*/
 
     private fun getColorPickerView(dialog: AlertDialog): View {
         val rootView = layoutInflater.inflate(R.layout.layout_color_picker, null)
@@ -355,7 +363,9 @@ class MainActivity : AppCompatActivity() {
 
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
-        nm!!.notify(0, mNotification)
+        mNotification?.let {
+            nm!!.notify(0, it)
+        }
     }
 
     companion object {
