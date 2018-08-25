@@ -8,8 +8,8 @@ android {
         applicationId "com.github.xiaofei_dev.vibrator"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 15
-        versionName "1.9.1"
+        versionCode 16
+        versionName "1.9.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.android.support:design:27+'
 
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //Anko （Kotlin 库）
     implementation "org.jetbrains.anko:anko-common:$anko_version"
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
