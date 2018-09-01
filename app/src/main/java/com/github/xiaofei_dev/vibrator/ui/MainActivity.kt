@@ -15,12 +15,13 @@ import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
 import com.github.xiaofei_dev.vibrator.R
-import com.github.xiaofei_dev.vibrator.extension.screenWidth
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 import com.github.xiaofei_dev.vibrator.singleton.Preference.isChecked
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mProgress
@@ -48,7 +49,11 @@ class MainActivity : AppCompatActivity() {
         setTheme(this)
         setContentView(R.layout.activity_main)
 
-        setVibratePattern(mProgress)
+        mIntensity = 40 - mProgress
+        if(mIntensity <= 0){
+            mIntensity = 1
+        }
+        setVibratePattern(mIntensity)
         //mVibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         mVibratorUtil = VibratorUtil(getSystemService(Service.VIBRATOR_SERVICE) as Vibrator)
 
@@ -199,7 +204,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setVibratePattern(duration: Int) {
-        VibratorUtil.mPattern[1] = (duration * 20).toLong()
+        VibratorUtil.mPattern[1] = (duration * 16).toLong()
         VibratorUtil.mPattern[2] = (duration * 4).toLong()
     }
 
@@ -211,8 +216,11 @@ class MainActivity : AppCompatActivity() {
         seekBar.progress = mProgress
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, mProgress: Int, fromUser: Boolean) {
-                mIntensity = mProgress
-                Preference.mProgress = mIntensity
+                mIntensity = 40 - mProgress
+                if(mIntensity <= 0){
+                    mIntensity = 1
+                }
+                Preference.mProgress = mProgress
                 setVibratePattern(mIntensity)
             }
 

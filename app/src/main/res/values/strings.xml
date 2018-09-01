@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Vibrator</string>
-    <string name="app_verdion">Vibrator v1.9.0</string>
+    <string name="app_verdion">Vibrator v2.0.0</string>
     <string name="start_vibrate">点击屏幕开始震动</string>
     <string name="stop_vibrate">点击屏幕停止震动</string>
 
@@ -22,7 +22,7 @@
     <string name="not_allow">震动期间不允许切换主题</string>
 
     <string name="bottom_bar_left">频率</string>
-    <string name="bottom_bar_right">低</string>
+    <string name="bottom_bar_right">高</string>
 
     <string name="close">取消</string>
 
