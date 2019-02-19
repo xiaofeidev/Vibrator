@@ -22,6 +22,7 @@ import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.singleton.AppStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 import com.github.xiaofei_dev.vibrator.singleton.Preference.isChecked
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mProgress
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         setVibratePattern(mIntensity)
         //mVibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         mVibratorUtil = VibratorUtil(getSystemService(Service.VIBRATOR_SERVICE) as Vibrator)
-
+        AppStatus.mNotThemeChange = true
         initViews()
 
         val filter = IntentFilter("android.intent.action.SCREEN_OFF")
@@ -65,13 +66,11 @@ class MainActivity : AppCompatActivity() {
         mMyRecever = MyReceiver()
         registerReceiver(mMyRecever, filter)
         Log.d(TAG, "onCreate: ")
-
     }
 
     override fun onDestroy() {
         mNotification = null
-        //        nm.cancel(0);
-        if (nm != null) {
+        if (nm != null && AppStatus.mNotThemeChange) {
             nm!!.cancelAll()
         }
         //        unregisterReceiver(mMyRecever);
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val mNowTime = System.currentTimeMillis()//记录本次按键时刻
-        if (mNowTime - mPressedTime > 1000) {//比较两次按键时间差
+        if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
             Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show()
             mPressedTime = mNowTime
         } else {
@@ -97,13 +96,10 @@ class MainActivity : AppCompatActivity() {
                 isInApp = false
                 mVibratorUtil!!.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
-                //seekBar.setVisibility(View.VISIBLE);
                 setBottomBarVisibility()
                 mAnimator!!.cancel()
             }
             super.onBackPressed()
-            //            finish();
-            //            System.exit(0);
         }
     }
 
@@ -184,7 +180,6 @@ class MainActivity : AppCompatActivity() {
                 isInApp = true
                 mVibratorUtil!!.vibrate(mVibrateMode)
                 textHint.setText(R.string.stop_vibrate)
-                //seekBar.setVisibility(View.GONE);
                 mAnimator!!.start()
                 setBottomBarVisibility()
                 mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
@@ -263,6 +258,7 @@ class MainActivity : AppCompatActivity() {
                 nm!!.notify(0, it)
             }
         }
+        ////////////////发通知结束
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
         mAnimator!!.setTarget(textHint)
     }
@@ -303,9 +299,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             dialog.cancel()
-            //                restart();
             window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
             recreate()
+            AppStatus.mNotThemeChange = false
         }
 
         rootView.findViewById<View>(R.id.magenta).setOnClickListener(clickListener)
@@ -371,9 +367,9 @@ class MainActivity : AppCompatActivity() {
 
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
-        mNotification?.let {
+        /*mNotification?.let {
             nm!!.notify(0, it)
-        }
+        }*/
     }
 
     companion object {
@@ -390,5 +386,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

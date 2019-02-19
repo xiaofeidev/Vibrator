@@ -22,3 +22,9 @@ object Preference{
     var mProgress:Int by DelegatesExt.preference(App.instance,PreferenceKey.PROGRESS, 5)
     var mTheme:Int by DelegatesExt.preference(App.instance,PreferenceKey.THEME, 0)
 }
+
+//进程状态
+object AppStatus{
+    //用于防止主界面切换主题的时候通知闪烁
+    var mNotThemeChange = true
+}

@@ -8,8 +8,8 @@ import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.util.OpenUtil
 import org.jetbrains.anko.find
 
-class AboutActivity : AppCompatActivity(), View.OnClickListener {
-
+class AboutActivity : AppCompatActivity(),
+        View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
@@ -37,6 +37,5 @@ class AboutActivity : AppCompatActivity(), View.OnClickListener {
             R.id.itemDonate ->
                 OpenUtil.alipayDonate(this)
         }
-
     }
 }
