@@ -22,6 +22,7 @@ import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.extension.yes
 import com.github.xiaofei_dev.vibrator.singleton.AppStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 import com.github.xiaofei_dev.vibrator.singleton.Preference.isChecked
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         mNotification = null
         if (nm != null && AppStatus.mNotThemeChange) {
-            nm!!.cancelAll()
+            nm?.cancelAll()
         }
         //        unregisterReceiver(mMyRecever);
         if (mMyRecever != null) {
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         //        if(mAnimator.isStarted()){
         //            mAnimator.cancel();
         //        }
-        mAnimator!!.cancel()
+        mAnimator?.cancel()
         super.onDestroy()
     }
 
@@ -92,12 +93,12 @@ class MainActivity : AppCompatActivity() {
             mPressedTime = mNowTime
         } else {
             //退出程序
-            if (mVibratorUtil!!.isVibrate) {
+            if (mVibratorUtil?.isVibrate?:false) {
                 isInApp = false
-                mVibratorUtil!!.stopVibrate()
+                mVibratorUtil?.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
                 setBottomBarVisibility()
-                mAnimator!!.cancel()
+                mAnimator?.cancel()
             }
             super.onBackPressed()
         }
@@ -165,36 +166,35 @@ class MainActivity : AppCompatActivity() {
     private inner class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == "android.intent.action.SCREEN_OFF" && isInApp) {
-                mVibratorUtil!!.vibrate(mVibrateMode)
-            } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && mVibratorUtil!!.isVibrate) {
+                mVibratorUtil?.vibrate(mVibrateMode)
+            } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && mVibratorUtil?.isVibrate?:false) {
                 isInApp = false
-                mVibratorUtil!!.stopVibrate()
+                mVibratorUtil?.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
-                mAnimator!!.cancel()
+                mAnimator?.cancel()
                 setBottomBarVisibility()
-                mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
+                mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
                 mNotification?.let {//更新通知
-                    nm!!.notify(0, it)
+                    nm?.notify(0, it)
                 }
-            } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && !mVibratorUtil!!.isVibrate) {
+            } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && !(mVibratorUtil?.isVibrate?:false)) {
                 isInApp = true
-                mVibratorUtil!!.vibrate(mVibrateMode)
+                mVibratorUtil?.vibrate(mVibrateMode)
                 textHint.setText(R.string.stop_vibrate)
-                mAnimator!!.start()
+                mAnimator?.start()
                 setBottomBarVisibility()
-                mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
+                mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
                 mNotification?.let {//更新通知
-                    nm!!.notify(0, it)
+                    nm?.notify(0, it)
                 }
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.close") {
                 isInApp = false
-                mVibratorUtil!!.stopVibrate()
+                mVibratorUtil?.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
-                mAnimator!!.cancel()
+                mAnimator?.cancel()
                 setBottomBarVisibility()
-                nm!!.cancelAll()
+                nm?.cancelAll()
             }
-
         }
     }
 
@@ -230,41 +230,41 @@ class MainActivity : AppCompatActivity() {
 
         //发出去通知
         sendNotification()
-        mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
+        mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
         mNotification?.let {//更新通知
-            nm!!.notify(0, it)
+            nm?.notify(0, it)
         }
         textHint.setOnClickListener {
-            if (!mVibratorUtil!!.isVibrate) {
+            if (!(mVibratorUtil?.isVibrate?:false)) {
                 isInApp = true
-                mVibratorUtil!!.vibrate(mVibrateMode)
+                mVibratorUtil?.vibrate(mVibrateMode)
                 textHint.setText(R.string.stop_vibrate)
                 //seekBar.setVisibility(View.GONE);
                 setBottomBarVisibility()
-                mAnimator!!.start()
+                mAnimator?.start()
                 //                    sendNotification();
-                mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
+                mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
             } else {
                 isInApp = false
-                mVibratorUtil!!.stopVibrate()
+                mVibratorUtil?.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
                 //seekBar.setVisibility(View.VISIBLE);
                 setBottomBarVisibility()
-                mAnimator!!.cancel()
+                mAnimator?.cancel()
                 //nm.cancelAll();
-                mRemoteViews!!.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
+                mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
             }
             mNotification?.let {//更新通知
-                nm!!.notify(0, it)
+                nm?.notify(0, it)
             }
         }
         ////////////////发通知结束
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
-        mAnimator!!.setTarget(textHint)
+        mAnimator?.setTarget(textHint)
     }
 
     private fun setBottomBarVisibility() {
-        if (mVibratorUtil!!.isVibrate || isChecked) {
+        if (mVibratorUtil?.isVibrate?:false || isChecked) {
             bottomBar.visibility = View.GONE
         } else {
             bottomBar.visibility = View.VISIBLE
@@ -281,12 +281,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun getColorPickerView(dialog: AlertDialog): View {
         val rootView = layoutInflater.inflate(R.layout.layout_color_picker, null)
-
         val clickListener = View.OnClickListener { v ->
             //若正在震动则不允许切换主题
-            if (mVibratorUtil!!.isVibrate) {
-                ToastUtil.showToast(this@MainActivity, getString(R.string.not_allow))
-                return@OnClickListener
+            mVibratorUtil?.let {
+                it.isVibrate.yes {
+                    ToastUtil.showToast(this@MainActivity, getString(R.string.not_allow))
+                    return@OnClickListener
+                }
             }
             when (v.id) {
                 R.id.magenta -> mTheme = R.style.AppTheme
@@ -295,8 +296,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.yellow -> mTheme = R.style.AppTheme_Yellow
                 R.id.green -> mTheme = R.style.AppTheme_Green
                 R.id.blue -> mTheme = R.style.AppTheme_Blue
-                else -> {
-                }
             }
             dialog.cancel()
             window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
@@ -348,12 +347,12 @@ class MainActivity : AppCompatActivity() {
         val control = PendingIntent.getBroadcast(this, 0,
                 Intent("com.github.xiaofei_dev.vibrator.action"),
                 PendingIntent.FLAG_UPDATE_CURRENT)
-        mRemoteViews!!.setOnClickPendingIntent(R.id.action, control)
+        mRemoteViews?.setOnClickPendingIntent(R.id.action, control)
 
         val close = PendingIntent.getBroadcast(this, 1,
                 Intent("com.github.xiaofei_dev.vibrator.close"),
                 PendingIntent.FLAG_UPDATE_CURRENT)
-        mRemoteViews!!.setOnClickPendingIntent(R.id.close, close)
+        mRemoteViews?.setOnClickPendingIntent(R.id.close, close)
 
         builder.setContentIntent(intent)
                 .setSmallIcon(R.drawable.ic_vibration)
@@ -368,7 +367,7 @@ class MainActivity : AppCompatActivity() {
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
         /*mNotification?.let {
-            nm!!.notify(0, it)
+            nm?.notify(0, it)
         }*/
     }
 

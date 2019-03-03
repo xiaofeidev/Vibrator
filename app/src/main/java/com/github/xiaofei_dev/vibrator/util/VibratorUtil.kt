@@ -41,7 +41,7 @@ class VibratorUtil(private val mVibrator: Vibrator) {
                 Log.d(TAG, "vibrate:0 ")
             }
             KEEP ->
-                //                mVibrator.vibrate(mDuration);
+//                mVibrator.vibrate(mDuration);
                 mVibrator.vibrate(mPatternKeep, 0)
             else -> {
             }

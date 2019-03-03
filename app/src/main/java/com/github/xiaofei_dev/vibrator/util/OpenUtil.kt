@@ -21,7 +21,6 @@ object OpenUtil {
             e.printStackTrace()
             openApplicationMarketForLinkBySystem(appPackageName, context)
         }
-
     }
 
     fun openApplicationMarketForLinkBySystem(packageName: String, context: Context) {
@@ -31,14 +30,14 @@ object OpenUtil {
     }
 
     fun openLink(context: Context, intent: Intent?, link: String, isThrowException: Boolean) {
-        var intent = intent
-        if (intent == null) {
-            intent = Intent(Intent.ACTION_VIEW)
+        var intent1 = intent
+        if (intent1 == null) {
+            intent1 = Intent(Intent.ACTION_VIEW)
         }
 
         try {
-            intent.data = Uri.parse(link)
-            context.startActivity(intent)
+            intent1.data = Uri.parse(link)
+            context.startActivity(intent1)
         } catch (e: Exception) {
             if (isThrowException) {
                 throw e

@@ -8,8 +8,8 @@ android {
         applicationId "com.github.xiaofei_dev.vibrator"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 18
-        versionName "2.1.0"
+        versionCode 19
+        versionName "2.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
