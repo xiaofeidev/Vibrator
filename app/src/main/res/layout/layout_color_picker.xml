@@ -32,6 +32,7 @@
             style="@style/colorPickerStyle"
             android:background="@color/colorAccent_Pink"
             android:text="@string/pink"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -42,22 +43,37 @@
             style="@style/colorPickerStyle"
             android:background="@color/colorAccent_Yellow"
             android:text="@string/yellow"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#ffffff"/>
+
         <TextView
             android:id="@+id/green"
             style="@style/colorPickerStyle"
             android:background="@color/colorAccent_Green"
             android:text="@string/green"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#ffffff"/>
+
         <TextView
             android:id="@+id/blue"
             style="@style/colorPickerStyle"
             android:background="@color/colorAccent_Blue"
             android:text="@string/blue"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff"/>
+
+        <TextView
+            android:id="@+id/black"
+            style="@style/colorPickerStyle"
+            android:background="@color/black"
+            android:text="@string/black"/>
 </LinearLayout>

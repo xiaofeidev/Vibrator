@@ -32,6 +32,7 @@ import com.github.xiaofei_dev.vibrator.singleton.Preference.mVibrateMode
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.notificationManager
 
 class MainActivity : AppCompatActivity() {
@@ -296,6 +297,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.yellow -> mTheme = R.style.AppTheme_Yellow
                 R.id.green -> mTheme = R.style.AppTheme_Green
                 R.id.blue -> mTheme = R.style.AppTheme_Blue
+                R.id.black -> mTheme = R.style.AppTheme_Black
             }
             dialog.cancel()
             window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
@@ -303,12 +305,13 @@ class MainActivity : AppCompatActivity() {
             AppStatus.mNotThemeChange = false
         }
 
-        rootView.findViewById<View>(R.id.magenta).setOnClickListener(clickListener)
-        rootView.findViewById<View>(R.id.red).setOnClickListener(clickListener)
-        rootView.findViewById<View>(R.id.pink).setOnClickListener(clickListener)
-        rootView.findViewById<View>(R.id.yellow).setOnClickListener(clickListener)
-        rootView.findViewById<View>(R.id.green).setOnClickListener(clickListener)
-        rootView.findViewById<View>(R.id.blue).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.magenta).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.red).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.pink).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.yellow).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.green).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.blue).setOnClickListener(clickListener)
+        rootView.find<View>(R.id.black).setOnClickListener(clickListener)
 
         return rootView
     }
@@ -380,7 +383,8 @@ class MainActivity : AppCompatActivity() {
                 R.style.AppTheme_Pink,
                 R.style.AppTheme_Yellow,
                 R.style.AppTheme_Green,
-                R.style.AppTheme_Blue -> context.setTheme(mTheme)
+                R.style.AppTheme_Blue,
+                R.style.AppTheme_Black -> context.setTheme(mTheme)
                 else -> context.setTheme(R.style.AppTheme)
             }
         }

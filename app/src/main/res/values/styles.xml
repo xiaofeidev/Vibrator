@@ -54,9 +54,18 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
+    <style name="AppTheme_Black" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/just_black</item>
+        <item name="colorAccent">@color/gery</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
     <style name="colorPickerStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">55dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:gravity">center</item>

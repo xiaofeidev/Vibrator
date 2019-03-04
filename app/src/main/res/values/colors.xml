@@ -30,6 +30,7 @@
 
     <color name="textColor">#ffffff</color>
 
+    <color name="just_black">#000000</color>
     <color name="black">#1d1d1d</color>
     <color name="whiteLow">#f0f0f0</color>
     <color name="gery">#7e7e7e</color>
