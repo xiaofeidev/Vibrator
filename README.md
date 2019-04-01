@@ -1,4 +1,5 @@
 # Vibrator
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 通过调用手机的振动马达实现按摩功能
 
 支持锁屏保持振动
