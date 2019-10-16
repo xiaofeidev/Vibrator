@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Vibrator</string>
-    <string name="app_verdion">Vibrator v2.2.0</string>
+    <string name="app_version">Vibrator V%1$s</string>
     <string name="start_vibrate">点击屏幕开始震动</string>
     <string name="stop_vibrate">点击屏幕停止震动</string>
 

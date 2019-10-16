@@ -1,11 +1,14 @@
 package com.github.xiaofei_dev.vibrator.ui
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.util.OpenUtil
+import kotlinx.android.synthetic.main.activity_about.*
 import org.jetbrains.anko.find
 
 class AboutActivity : AppCompatActivity(),
@@ -17,6 +20,7 @@ class AboutActivity : AppCompatActivity(),
         find<View>(R.id.itemOpenSource).setOnClickListener(this)
         find<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
         find<View>(R.id.itemDonate).setOnClickListener(this)
+        textVersion.setText(getString(R.string.app_version, getPackageVersion(this)))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -37,5 +41,23 @@ class AboutActivity : AppCompatActivity(),
             R.id.itemDonate ->
                 OpenUtil.alipayDonate(this)
         }
+    }
+
+    /**
+     * 获取当前App的版本
+     * @param context
+     * @return
+     */
+    private fun getPackageVersion(context: Context): String? {
+        val manager = context.packageManager
+        var name: String? = null
+        try {
+            val info = manager.getPackageInfo(context.packageName, 0)
+            name = info.versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+
+        return name
     }
 }

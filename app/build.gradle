@@ -2,15 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+def app = rootProject.ext.android
 android {
-    compileSdkVersion 27
+    compileSdkVersion app.compileSdkVersion
     defaultConfig {
-        applicationId "com.github.xiaofei_dev.vibrator"
-        minSdkVersion 21
-        targetSdkVersion 27
-        versionCode 20
-        versionName "2.2.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId app.appId
+        minSdkVersion app.minSdkVersion
+        targetSdkVersion app.targetSdkVersion
+        versionCode app.versionCode
+        versionName app.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -33,25 +35,25 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.zhy:percent-support-extends:1.1.1'
-    implementation 'com.android.support:appcompat-v7:27+'
-    implementation 'com.android.support:design:27+'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Anko （Kotlin 库）
     implementation "org.jetbrains.anko:anko-common:$anko_version"
-    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
+//    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
     // Anko Layouts
     implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
     // sdk15, sdk19, sdk21, sdk23 are also available
     implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
     implementation "org.jetbrains.anko:anko-support-v4:$anko_version"
     // 主要为兼容一些控件事件的协程，不过协程coroutines目前还不是kotlin的正式内容
-    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
-    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+//    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
+//    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
 //    compile 'com.balysv:material-ripple:1.0.2'
 }

@@ -19,7 +19,7 @@ object PreferenceKey{
 object Preference{
     var mVibrateMode:Int by DelegatesExt.preference(App.instance,PreferenceKey.MODE, VibratorUtil.INTERRUPT)
     var isChecked:Boolean by DelegatesExt.preference(App.instance,PreferenceKey.IS_CHECKED, false)
-    var mProgress:Int by DelegatesExt.preference(App.instance,PreferenceKey.PROGRESS, 5)
+    var mProgress:Int by DelegatesExt.preference(App.instance,PreferenceKey.PROGRESS, 40)
     var mTheme:Int by DelegatesExt.preference(App.instance,PreferenceKey.THEME, 0)
 }
 
