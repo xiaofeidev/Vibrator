@@ -19,9 +19,9 @@ android {
 //            buildConfigField "boolean", "LOG_DEBUG", "true"
 ////            debuggable true
 ////            applicationIdSuffix ".debug"
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {

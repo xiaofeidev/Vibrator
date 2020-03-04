@@ -1,5 +1,7 @@
 package com.github.xiaofei_dev.vibrator.util
 
+import android.media.AudioAttributes
+import android.os.Build
 import android.os.Vibrator
 import android.util.Log
 
@@ -27,6 +29,11 @@ class VibratorUtil(private val mVibrator: Vibrator) {
     var isVibrate: Boolean = false
         private set
 
+    private val mAudioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .setUsage(AudioAttributes.USAGE_ALARM) //key
+            .build()
+
     fun setDuration(duration: Long) {
         mDuration = duration
     }
@@ -37,12 +44,19 @@ class VibratorUtil(private val mVibrator: Vibrator) {
         isVibrate = true
         when (mode) {
             INTERRUPT -> {
-                mVibrator.vibrate(mPattern, 0)
+                if (Build.VERSION.SDK_INT >= 21){
+                    mVibrator.vibrate(mPattern, 0, mAudioAttributes)
+                }else{
+                    mVibrator.vibrate(mPattern, 0)
+                }
                 Log.d(TAG, "vibrate:0 ")
             }
             KEEP ->
-//                mVibrator.vibrate(mDuration);
-                mVibrator.vibrate(mPatternKeep, 0)
+                if (Build.VERSION.SDK_INT >= 21){
+                    mVibrator.vibrate(mPatternKeep, 0, mAudioAttributes)
+                }else{
+                    mVibrator.vibrate(mPatternKeep, 0)
+                }
             else -> {
             }
         }

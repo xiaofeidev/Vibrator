@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             mIntensity = 1
         }
         setVibratePattern(mIntensity)
-        //mVibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         mVibratorUtil = VibratorUtil(getSystemService(Service.VIBRATOR_SERVICE) as Vibrator)
         AppStatus.mNotThemeChange = true
         initViews()
@@ -67,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         filter.addAction("com.github.xiaofei_dev.vibrator.close")
         mMyRecever = MyReceiver()
         registerReceiver(mMyRecever, filter)
-        Log.d(TAG, "onCreate: ")
     }
 
     override fun onDestroy() {
@@ -75,14 +72,10 @@ class MainActivity : AppCompatActivity() {
         if (nm != null && AppStatus.mNotThemeChange) {
             nm?.cancelAll()
         }
-        //        unregisterReceiver(mMyRecever);
         if (mMyRecever != null) {
             unregisterReceiver(mMyRecever)
             mMyRecever = null
         }
-        //        if(mAnimator.isStarted()){
-        //            mAnimator.cancel();
-        //        }
         mAnimator?.cancel()
         super.onDestroy()
     }
