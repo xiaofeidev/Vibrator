@@ -1,26 +1,23 @@
 package com.github.xiaofei_dev.vibrator.singleton
 
-import com.github.xiaofei_dev.vibrator.App
-import com.github.xiaofei_dev.vibrator.delegates.DelegatesExt
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
+import com.xiaofeidev.delegatedemo.delegates.SPDelegates
 
 /**
  * Created by Administrator on 2018/2/14.
  */
-//首选项键
-object PreferenceKey{
-    const val MODE = "MODE"
-    const val IS_CHECKED = "IS_CHECKED"
-    const val PROGRESS = "PROGRESS"
-    const val THEME = "THEME"
-}
 
-//首选项
+//首选项键和首选项
 object Preference{
-    var mVibrateMode:Int by DelegatesExt.preference(App.instance,PreferenceKey.MODE, VibratorUtil.INTERRUPT)
-    var isChecked:Boolean by DelegatesExt.preference(App.instance,PreferenceKey.IS_CHECKED, false)
-    var mProgress:Int by DelegatesExt.preference(App.instance,PreferenceKey.PROGRESS, 40)
-    var mTheme:Int by DelegatesExt.preference(App.instance,PreferenceKey.THEME, 0)
+    private const val MODE = "MODE"
+    private const val IS_CHECKED = "IS_CHECKED"
+    private const val PROGRESS = "PROGRESS"
+    private const val THEME = "THEME"
+
+    var mVibrateMode:Int by SPDelegates(MODE, VibratorUtil.INTERRUPT)
+    var isChecked:Boolean by SPDelegates(IS_CHECKED, false)
+    var mProgress:Int by SPDelegates(PROGRESS, 40)
+    var mTheme:Int by SPDelegates(THEME, 0)
 }
 
 //进程状态
