@@ -16,7 +16,6 @@ class AboutActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-//        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         find<View>(R.id.itemOpenSource).setOnClickListener(this)
         find<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
         find<View>(R.id.itemDonate).setOnClickListener(this)

@@ -53,7 +53,6 @@ object OpenUtil {
     fun alipayDonate(context: Context) {
         val intent = Intent()
         intent.action = "android.intent.action.VIEW"
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         val payUrl = "https://qr.alipay.com/FKX06496G2PCRYR0LXR7BC"
         intent.data = Uri.parse("alipayqr://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=" + payUrl)
         if (intent.resolveActivity(context.packageManager) != null) {

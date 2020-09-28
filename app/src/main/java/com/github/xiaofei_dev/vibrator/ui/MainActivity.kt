@@ -130,28 +130,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.setView(getColorPickerView(dialog))
                 dialog.show()
             }
-            /*R.id.discover ->{
-                val dialog = AlertDialog.Builder(this, R.style.Dialog)
-                        *//*.setTitle(getString(R.string.discover))
-                        .setPositiveButton(getString(R.string.close)) {
-                            dialog, which -> dialog.cancel()
-                        }*//*
-                        .create()
-                dialog.setView(getDiscoverView(dialog))
-                dialog.show()
-                //得到这个dialog界面的参数对象
-                val params:WindowManager.LayoutParams = dialog.getWindow().getAttributes();
-                //设置dialog的界面宽度
-                params.width = screenWidth/5 *4
-                //设置dialog高度为包裹内容
-                params.height =  WindowManager.LayoutParams.WRAP_CONTENT;
-                //设置dialog的重心
-                params.gravity = Gravity.CENTER;
-                dialog.window.attributes = params
-            }*/
             R.id.about -> startActivity(Intent(this, AboutActivity::class.java))
-            else -> {
-            }
         }
         return true
     }
@@ -197,7 +176,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        //        mToolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_sort_white_36dp,null));
         setSupportActionBar(toolbar)
         setBottomBarVisibility()
 
@@ -232,19 +210,15 @@ class MainActivity : AppCompatActivity() {
                 isInApp = true
                 mVibratorUtil?.vibrate(mVibrateMode)
                 textHint.setText(R.string.stop_vibrate)
-                //seekBar.setVisibility(View.GONE);
                 setBottomBarVisibility()
                 mAnimator?.start()
-                //                    sendNotification();
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
             } else {
                 isInApp = false
                 mVibratorUtil?.stopVibrate()
                 textHint.setText(R.string.start_vibrate)
-                //seekBar.setVisibility(View.VISIBLE);
                 setBottomBarVisibility()
                 mAnimator?.cancel()
-                //nm.cancelAll();
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
             }
             mNotification?.let {//更新通知
@@ -263,15 +237,6 @@ class MainActivity : AppCompatActivity() {
             bottomBar.visibility = View.VISIBLE
         }
     }
-
-    /*private fun getDiscoverView(dialog: AlertDialog): View{
-        val rootView = layoutInflater.inflate(R.layout.layout_discover, null)
-        *//*val layoutParams:ViewGroup.LayoutParams =
-                ViewGroup.LayoutParams(dip(200), ViewGroup.LayoutParams.WRAP_CONTENT)
-        rootView.layoutParams = layoutParams*//*
-        return rootView
-    }*/
-
     private fun getColorPickerView(dialog: AlertDialog): View {
         val rootView = layoutInflater.inflate(R.layout.layout_color_picker, null)
         val clickListener = View.OnClickListener { v ->
@@ -308,13 +273,6 @@ class MainActivity : AppCompatActivity() {
         return rootView
     }
 
-    //    private void restart() {
-    //        Intent intent = getIntent();
-    //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-    //        startActivity(intent);
-    ////        finish();
-    //    }
-
     private fun initChannels() {
         if (Build.VERSION.SDK_INT < 26) {
             return
@@ -326,7 +284,6 @@ class MainActivity : AppCompatActivity() {
         channel.description = "按摩棒默认通知渠道"
         channel.setShowBadge(false)
         channel.setSound(null, null)
-//        NotificationManagerCompat.from(this)
         (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
     }
 
@@ -362,13 +319,9 @@ class MainActivity : AppCompatActivity() {
 
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
-        /*mNotification?.let {
-            nm?.notify(0, it)
-        }*/
     }
 
     companion object {
-        private val TAG = "MainActivity"
         //设置主题
         fun setTheme(context: Context) {
             when (mTheme) {
