@@ -32,7 +32,6 @@ import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
-import org.jetbrains.anko.notificationManager
 
 class MainActivity : AppCompatActivity() {
     private var mPressedTime: Long = 0
@@ -327,7 +326,8 @@ class MainActivity : AppCompatActivity() {
         channel.description = "按摩棒默认通知渠道"
         channel.setShowBadge(false)
         channel.setSound(null, null)
-        notificationManager.createNotificationChannel(channel)
+//        NotificationManagerCompat.from(this)
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
     }
 
     private fun sendNotification() {
