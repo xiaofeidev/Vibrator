@@ -45,10 +45,15 @@ class MainActivity : AppCompatActivity() {
     private var isInApp: Boolean = false
     private var mAnimator: Animator? = null
 
+    private var mPendingIntentFlag = PendingIntent.FLAG_UPDATE_CURRENT
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(this)
         setContentView(R.layout.activity_main)
+        if (Build.VERSION.SDK_INT >= 31){
+            mPendingIntentFlag = mPendingIntentFlag or PendingIntent.FLAG_IMMUTABLE
+        }
 
         mIntensity = 40 - mProgress
         if(mIntensity <= 0){
@@ -293,18 +298,18 @@ class MainActivity : AppCompatActivity() {
         val i = Intent(this, MainActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         val intent = PendingIntent.getActivity(this, 0, i,
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            mPendingIntentFlag)
 
         mRemoteViews = RemoteViews(packageName, R.layout.layout_notification)
 
         val control = PendingIntent.getBroadcast(this, 0,
                 Intent("com.github.xiaofei_dev.vibrator.action"),
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            mPendingIntentFlag)
         mRemoteViews?.setOnClickPendingIntent(R.id.action, control)
 
         val close = PendingIntent.getBroadcast(this, 1,
                 Intent("com.github.xiaofei_dev.vibrator.close"),
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            mPendingIntentFlag)
         mRemoteViews?.setOnClickPendingIntent(R.id.close, close)
 
         builder.setContentIntent(intent)
