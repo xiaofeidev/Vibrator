@@ -27,11 +27,11 @@
 
     <string name="close">取消</string>
 
-    <string name="aboutDeveloper">作者：github @xiaofei-dev</string>
+    <string name="aboutDeveloper">作者：github @xiaofeidev</string>
     <string name="aboutXBB_Title">关于本应用：</string>
 
     <string name="aboutXBB_OpenSource">
-        ▶ 本应用已开源，点此访问<a href="">项目托管地址</a>。
+        ▶ 本应用已开源，点此访问<a href="">APP源码</a>。
     </string>
     <string name="aboutXBB_ScoreAndFeedback">
         ▶ 想对作者说点什么，点此<a href="">评分或反馈</a>。
@@ -40,7 +40,7 @@
         ▶ 非常喜欢本应用，也可以<a href="">捐赠</a>一下作者。
     </string>
 
-    <string name="openSourceLink">https://github.com/xiaofei-dev/Vibrator</string>
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
     <string name="donateToast">十分感谢！作者支付宝账号(微信同)已复制到剪贴板</string>
     <string name="alipay">15853186920</string>
 
