@@ -30,6 +30,8 @@ import com.github.xiaofei_dev.vibrator.singleton.Preference.mTheme
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mVibrateMode
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.initialization.AdapterStatus
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
@@ -50,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         setTheme(this)
         setContentView(R.layout.activity_main)
 
+        initAd()
+
         mIntensity = 40 - mProgress
         if(mIntensity <= 0){
             mIntensity = 1
@@ -64,6 +68,51 @@ class MainActivity : AppCompatActivity() {
         filter.addAction("com.github.xiaofei_dev.vibrator.close")
         mMyRecever = MyReceiver()
         registerReceiver(mMyRecever, filter)
+    }
+
+    //加载广告
+    private fun initAd(){
+        //初始化 AdMob
+        MobileAds.initialize(this) {
+            it.adapterStatusMap?.values?.forEach {
+                it?.initializationState?.let {
+                    if (it == AdapterStatus.State.READY){
+
+                    }
+                }
+            }
+        }
+        adView.adListener = object : AdListener(){
+            override fun onAdClicked() {
+                super.onAdClicked()
+            }
+
+            override fun onAdClosed() {
+                super.onAdClosed()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                super.onAdFailedToLoad(p0)
+            }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+            }
+
+            override fun onAdOpened() {
+                super.onAdOpened()
+            }
+
+            override fun onAdSwipeGestureClicked() {
+                super.onAdSwipeGestureClicked()
+            }
+        }
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     override fun onDestroy() {
@@ -190,13 +239,9 @@ class MainActivity : AppCompatActivity() {
                 setVibratePattern(mIntensity)
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
 
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
         //发出去通知

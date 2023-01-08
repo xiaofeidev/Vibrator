@@ -45,4 +45,7 @@
     <string name="alipay">15853186920</string>
 
     <string name="about">关于</string>
+
+    <string name="banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_id_release"></string>
 </resources>

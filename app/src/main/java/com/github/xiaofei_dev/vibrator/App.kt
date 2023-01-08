@@ -1,6 +1,6 @@
 package com.github.xiaofei_dev.vibrator
 import android.app.Application
-
+import com.google.android.gms.ads.MobileAds
 
 
 /**
