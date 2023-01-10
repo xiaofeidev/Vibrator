@@ -6,9 +6,17 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.util.OpenUtil
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.initialization.AdapterStatus
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_about.adView
+import kotlinx.android.synthetic.main.activity_about.toolbar
 import org.jetbrains.anko.find
 
 class AboutActivity : AppCompatActivity(),
@@ -16,6 +24,11 @@ class AboutActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
+        initAd()
+        setSupportActionBar(toolbar)
+        //toolbar.title = ""
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         find<View>(R.id.itemOpenSource).setOnClickListener(this)
         find<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
         find<View>(R.id.itemDonate).setOnClickListener(this)
@@ -35,10 +48,28 @@ class AboutActivity : AppCompatActivity(),
                 val url = getString(R.string.openSourceLink)
                 OpenUtil.openLink(view.context, null, url, false)
             }
-            R.id.itemScoreAndFeedback -> OpenUtil.openApplicationMarket(packageName, "com.coolapk.market",
+            R.id.itemScoreAndFeedback -> OpenUtil.openApplicationMarket(packageName, "com.android.vending",
                     view.context)
             R.id.itemDonate ->
                 OpenUtil.alipayDonate(this)
+        }
+    }
+
+    //加载广告
+    private fun initAd(){
+        //初始化 AdMob
+        //MobileAds.getInitializationStatus()?.adapterStatusMap?.get(MobileAds::class.qualifiedName)
+        if (App.adState != AdapterStatus.State.READY){
+            MobileAds.initialize(this) {
+                it.adapterStatusMap?.get(MobileAds::class.qualifiedName)?.initializationState?.let {
+                    App.adState = it
+                    val adRequest = AdRequest.Builder().build()
+                    adView.loadAd(adRequest)
+                }
+            }
+        } else {
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
     }
 

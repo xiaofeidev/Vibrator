@@ -4,17 +4,17 @@
                 android:layout_height="wrap_content"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:theme="@style/blackTextColor">
-    <!--<android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-        &lt;!&ndash;app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>&ndash;&gt;
-    </android.support.design.widget.AppBarLayout>-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+    </com.google.android.material.appbar.AppBarLayout>
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -22,7 +22,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@color/whiteLow"
-        android:paddingBottom="20dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:layout_marginTop="?attr/actionBarSize">
         <!--android:layout_marginTop="?attr/actionBarSize"-->
         <ImageView
             android:id="@+id/imageView"
@@ -30,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
             android:adjustViewBounds="false"
             app:srcCompat="@mipmap/ic_launcher" />
 
@@ -40,10 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical|center"
             android:text="@string/app_version"
-            android:clickable="true"/>
-
+            android:clickable="true"
+            android:focusable="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -51,14 +53,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/relativeLayout">
-
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +67,6 @@
                 android:padding="8dp"
                 android:text="@string/aboutXBB_Title"
                 android:textStyle="bold"/>
-
 
             <TextView
                 android:id="@+id/itemOpenSource"
@@ -98,7 +97,6 @@
                 android:clickable="true"
                 android:padding="8dp"
                 android:text="@string/aboutXBB_Donate"/>
-
         </RadioGroup>
 
         <TextView
@@ -109,7 +107,22 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="32dp"
             android:text="@string/aboutDeveloper" />
-
     </RelativeLayout>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/bottomView"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_id_test"/>
+
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

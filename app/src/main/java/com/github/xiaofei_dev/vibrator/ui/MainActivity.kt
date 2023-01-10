@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.extension.yes
 import com.github.xiaofei_dev.vibrator.singleton.AppStatus
@@ -53,11 +54,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(this)
         setContentView(R.layout.activity_main)
+        initAd()
         if (Build.VERSION.SDK_INT >= 31){
             mPendingIntentFlag = mPendingIntentFlag or PendingIntent.FLAG_IMMUTABLE
         }
-
-        initAd()
 
         mIntensity = 40 - mProgress
         if(mIntensity <= 0){
@@ -78,46 +78,18 @@ class MainActivity : AppCompatActivity() {
     //加载广告
     private fun initAd(){
         //初始化 AdMob
-        MobileAds.initialize(this) {
-            it.adapterStatusMap?.values?.forEach {
-                it?.initializationState?.let {
-                    if (it == AdapterStatus.State.READY){
-
-                    }
+        if (App.adState != AdapterStatus.State.READY){
+            MobileAds.initialize(this) {
+                it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
+                    App.adState = it
+                    val adRequest = AdRequest.Builder().build()
+                    adView.loadAd(adRequest)
                 }
             }
+        } else {
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
-        adView.adListener = object : AdListener(){
-            override fun onAdClicked() {
-                super.onAdClicked()
-            }
-
-            override fun onAdClosed() {
-                super.onAdClosed()
-            }
-
-            override fun onAdFailedToLoad(p0: LoadAdError) {
-                super.onAdFailedToLoad(p0)
-            }
-
-            override fun onAdImpression() {
-                super.onAdImpression()
-            }
-
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-            }
-
-            override fun onAdOpened() {
-                super.onAdOpened()
-            }
-
-            override fun onAdSwipeGestureClicked() {
-                super.onAdSwipeGestureClicked()
-            }
-        }
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
     }
 
     override fun onDestroy() {
@@ -189,6 +161,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    //更新通知相关
     private inner class MyReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == "android.intent.action.SCREEN_OFF" && isInApp) {
