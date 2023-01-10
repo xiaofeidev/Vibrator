@@ -68,7 +68,7 @@
                 android:text="@string/aboutXBB_Title"
                 android:textStyle="bold"/>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/itemOpenSource"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:background="@drawable/button_state_selector"
                 android:clickable="true"
                 android:padding="8dp"
-                android:text="@string/aboutXBB_OpenSource"/>
+                android:text="@string/aboutXBB_OpenSource"/>-->
 
             <TextView
                 android:id="@+id/itemScoreAndFeedback"
@@ -88,7 +88,7 @@
                 android:padding="8dp"
                 android:text="@string/aboutXBB_ScoreAndFeedback"/>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/itemDonate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:background="@drawable/button_state_selector"
                 android:clickable="true"
                 android:padding="8dp"
-                android:text="@string/aboutXBB_Donate"/>
+                android:text="@string/aboutXBB_Donate"/>-->
         </RadioGroup>
 
         <TextView
@@ -117,7 +117,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@id/bottomView"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_id_test"/>
+        ads:adUnitId="@string/banner_id_release2"/>
 
     <View
         android:id="@+id/bottomView"

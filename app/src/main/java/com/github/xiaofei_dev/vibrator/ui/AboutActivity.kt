@@ -29,9 +29,9 @@ class AboutActivity : AppCompatActivity(),
         //toolbar.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        find<View>(R.id.itemOpenSource).setOnClickListener(this)
+        //find<View>(R.id.itemOpenSource).setOnClickListener(this)
         find<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
-        find<View>(R.id.itemDonate).setOnClickListener(this)
+        //find<View>(R.id.itemDonate).setOnClickListener(this)
         textVersion.setText(getString(R.string.app_version, getPackageVersion(this)))
     }
 
@@ -44,14 +44,14 @@ class AboutActivity : AppCompatActivity(),
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.itemOpenSource -> {
+            /*R.id.itemOpenSource -> {
                 val url = getString(R.string.openSourceLink)
                 OpenUtil.openLink(view.context, null, url, false)
-            }
+            }*/
             R.id.itemScoreAndFeedback -> OpenUtil.openApplicationMarket(packageName, "com.android.vending",
                     view.context)
-            R.id.itemDonate ->
-                OpenUtil.alipayDonate(this)
+            /*R.id.itemDonate ->
+                OpenUtil.alipayDonate(this)*/
         }
     }
 
