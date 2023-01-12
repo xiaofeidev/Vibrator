@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.extension.setTheme
 import com.github.xiaofei_dev.vibrator.util.OpenUtil
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -23,6 +24,7 @@ class AboutActivity : AppCompatActivity(),
         View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(this)
         setContentView(R.layout.activity_about)
         initAd()
         setSupportActionBar(toolbar)

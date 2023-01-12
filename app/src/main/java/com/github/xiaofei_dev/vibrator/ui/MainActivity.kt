@@ -22,6 +22,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.extension.setTheme
 import com.github.xiaofei_dev.vibrator.extension.yes
 import com.github.xiaofei_dev.vibrator.singleton.AppStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference
@@ -342,20 +343,5 @@ class MainActivity : AppCompatActivity() {
 
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
-    }
-
-    companion object {
-        //设置主题
-        fun setTheme(context: Context) {
-            when (mTheme) {
-                R.style.AppTheme_Red,
-                R.style.AppTheme_Pink,
-                R.style.AppTheme_Yellow,
-                R.style.AppTheme_Green,
-                R.style.AppTheme_Blue,
-                R.style.AppTheme_Black -> context.setTheme(mTheme)
-                else -> context.setTheme(R.style.AppTheme)
-            }
-        }
     }
 }

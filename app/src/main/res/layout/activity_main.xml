@@ -21,17 +21,15 @@
          android:id="@+id/textHint"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         android:gravity="center"
          android:layout_centerInParent="true"
-         android:layout_marginTop="?attr/actionBarSize"
+         android:background="?attr/selectableItemBackgroundBorderless"
+         android:fontFamily="sans-serif-medium"
+         android:gravity="center"
          android:padding="20dp"
          android:text="@string/start_vibrate"
          android:textSize="25sp"
-         android:typeface="monospace"
-         android:fontFamily="sans-serif-medium"
          android:textStyle="normal"
-         android:layout_above="@+id/bottomLayout"
-         android:background="?attr/selectableItemBackgroundBorderless"/>
+         android:typeface="monospace" />
 
      <FrameLayout
          android:id="@+id/bottomLayout"
@@ -89,5 +87,5 @@
          android:layout_centerHorizontal="true"
          android:layout_above="@id/bottomLayout"
          ads:adSize="BANNER"
-         ads:adUnitId="@string/banner_id_release1"/>
+         ads:adUnitId="@string/banner_id_test"/>
 </RelativeLayout>

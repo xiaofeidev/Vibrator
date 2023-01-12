@@ -104,8 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/radioGroup"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="32dp"
             android:text="@string/aboutDeveloper" />
     </RelativeLayout>
 
@@ -117,7 +117,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@id/bottomView"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_id_release2"/>
+        ads:adUnitId="@string/banner_id_test"/>
 
     <View
         android:id="@+id/bottomView"
