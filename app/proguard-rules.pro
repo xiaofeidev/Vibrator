@@ -79,7 +79,8 @@
 ## material
 -keep class com.google.android.material.** {*;}
 ## admob
--keep class com.google.android.gms.ads.** {*;}
+## -keep class com.google.android.gms.ads.** {*;}
+-keep class com.google.android.gms.ads.MobileAds
 
 ## 保留继承的
 -keep public class * extends android.support.v4.**

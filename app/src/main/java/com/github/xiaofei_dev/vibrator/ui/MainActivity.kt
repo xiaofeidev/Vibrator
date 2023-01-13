@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val mNowTime = System.currentTimeMillis()//记录本次按键时刻
         if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
-            Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.quit_hint, Toast.LENGTH_SHORT).show()
             mPressedTime = mNowTime
         } else {
             //退出程序

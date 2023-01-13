@@ -117,7 +117,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@id/bottomView"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_id_test"/>
+        ads:adUnitId="@string/banner_id_release2"/>
 
     <View
         android:id="@+id/bottomView"
