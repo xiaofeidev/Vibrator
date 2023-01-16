@@ -1,5 +1,6 @@
 package com.github.xiaofei_dev.vibrator.ui
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorInflater
 import android.app.*
@@ -7,6 +8,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
@@ -16,10 +18,13 @@ import android.view.View
 import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.extension.setTheme
@@ -50,6 +55,23 @@ class MainActivity : AppCompatActivity() {
     private var mAnimator: Animator? = null
 
     private var mPendingIntentFlag = PendingIntent.FLAG_UPDATE_CURRENT
+
+    val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+                sendNotification()
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // feature requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,14 +105,17 @@ class MainActivity : AppCompatActivity() {
             MobileAds.initialize(this) {
                 it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
                     App.adState = it
-                    val adRequest = AdRequest.Builder().build()
-                    adView.loadAd(adRequest)
+                    loadAd()
                 }
             }
         } else {
-            val adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
+            loadAd()
         }
+    }
+
+    private fun loadAd(){
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     override fun onDestroy() {
@@ -224,11 +249,33 @@ class MainActivity : AppCompatActivity() {
         })
 
         //发出去通知
-        sendNotification()
-        mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
-        mNotification?.let {//更新通知
-            nm?.notify(0, it)
+        if(Build.VERSION.SDK_INT >= 24){
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            if (notificationManager.areNotificationsEnabled()) {
+                // Permission granted
+                sendNotification()
+            } else {
+                // Permission not granted
+                if (Build.VERSION.SDK_INT >= 33){
+                    when {
+                        ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED -> {
+                                // You can use the API that requires the permission.
+                                sendNotification()
+                        }
+                        else -> {
+                            // You can directly ask for the permission.
+                            // The registered ActivityResultCallback gets the result of this request.
+                            requestPermissionLauncher.launch(
+                                Manifest.permission.POST_NOTIFICATIONS)
+                        }
+                    }
+                }
+            }
+        } else{
+            sendNotification()
         }
+
         textHint.setOnClickListener {
             if (!(mVibratorUtil?.isVibrate?:false)) {
                 isInApp = true
@@ -343,5 +390,10 @@ class MainActivity : AppCompatActivity() {
 
         nm = NotificationManagerCompat.from(this)
         mNotification = builder.build()
+
+        mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
+        mNotification?.let {//更新通知
+            nm?.notify(0, it)
+        }
     }
 }

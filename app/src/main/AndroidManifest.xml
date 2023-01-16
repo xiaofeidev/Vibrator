@@ -3,6 +3,7 @@
           package="com.github.xiaofei_dev.vibrator">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:name=".App"
