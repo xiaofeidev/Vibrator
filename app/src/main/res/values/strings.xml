@@ -18,7 +18,7 @@
     <string name="yellow">Yellow</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
-    <string name="black">Back</string>
+    <string name="black">Dark</string>
 
     <string name="not_allow">It is not allowed to switch themes during vibration</string>
 
