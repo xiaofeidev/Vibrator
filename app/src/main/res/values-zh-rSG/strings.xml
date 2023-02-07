@@ -43,13 +43,8 @@
 
     <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
     <string name="donateToast">十分感謝！作者支付寶賬號(微信同)已復製到剪貼板</string>
-    <string name="alipay">15853186920</string>
 
     <string name="about">關於</string>
 
     <string name="quit_hint">再按一次退出應用</string>
-
-    <string name="banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_id_release1">ca-app-pub-9708198084566779/3296344656</string>
-    <string name="banner_id_release2">ca-app-pub-9708198084566779/1845577908</string>
 </resources>

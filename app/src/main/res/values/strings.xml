@@ -42,13 +42,13 @@
 
     <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
     <string name="donateToast">Thank you very much! The author\'s Alipay account (same as WeChat) has been copied to the clipboard</string>
-    <string name="alipay">15853186920</string>
+    <string name="alipay" translatable="false">15853186920</string>
 
     <string name="about">About</string>
 
     <string name="quit_hint">Press it again to exit.</string>
 
-    <string name="banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_id_release1">ca-app-pub-9708198084566779/3296344656</string>
-    <string name="banner_id_release2">ca-app-pub-9708198084566779/1845577908</string>
+    <string name="banner_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_id_release1" translatable="false">ca-app-pub-9708198084566779/3296344656</string>
+    <string name="banner_id_release2" translatable="false">ca-app-pub-9708198084566779/1845577908</string>
 </resources>

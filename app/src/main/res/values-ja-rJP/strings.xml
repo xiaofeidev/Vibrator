@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">バイブレーター</string>
+    <string name="app_version">バイブレーター V%1$s</string>
+    <string name="start_vibrate">クリックして振動</string>
+    <string name="stop_vibrate">クリックして振動を停止</string>
+
+    <string name="remote_start_vibrate">クリックして振動</string>
+    <string name="remote_stop_vibrate">クリックして振動を停止</string>
+
+    <string name="keep">続き</string>
+    <string name="theme">テーマ</string>
+    <string name="discover">発見</string>
+    <string name="more">概要</string>
+
+    <string name="magenta">紫</string>
+    <string name="red">レッド</string>
+    <string name="pink">ピンク</string>
+    <string name="yellow">黄色</string>
+    <string name="green">緑</string>
+    <string name="blue">ブルー</string>
+    <string name="black">暗い</string>
+
+    <string name="not_allow">振動中にテーマを切り替えることはできません</string>
+
+    <string name="bottom_bar_left">頻度</string>
+    <string name="bottom_bar_right">高</string>
+
+    <string name="close">キャンセル</string>
+
+    <string name="aboutDeveloper">作成者: github @xiaofeidev</string>
+    <string name="aboutXBB_Title">このアプリケーションについて:</string>
+
+    <string name="aboutXBB_OpenSource">
+          ▶ <a href="">アプリのソース コード</a>にアクセスするには、ここをクリックしてください。
+      </string>
+    <string name="aboutXBB_ScoreAndFeedback">
+          ▶ <a href="">評価またはフィードバック</a>するには、ここをクリックしてください。
+      </string>
+    <string name="aboutXBB_Donate">
+          ▶ 著者に<a href="">寄付</a>することもできます。
+      </string>
+
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
+    <string name="donateToast">どうもありがとうございました! 著者の Alipay アカウント (WeChat と同じ) がクリップボードにコピーされました</string>
+
+    <string name="about">概要</string>
+
+    <string name="quit_hint">もう一度押すと終了します。</string>
+</resources>

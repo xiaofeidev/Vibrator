@@ -33,7 +33,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="false"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/textVersion"

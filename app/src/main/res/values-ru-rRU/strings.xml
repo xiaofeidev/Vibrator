@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Вибратор</string>
+    <string name="app_version">Вибратор V%1$s</string>
+    <string name="start_vibrate">Нажмите, чтобы включить вибрацию</string>
+    <string name="stop_vibrate">Нажмите, чтобы остановить вибрацию</string>
+
+    <string name="remote_start_vibrate">Нажмите, чтобы включить вибрацию</string>
+    <string name="remote_stop_vibrate">Нажмите, чтобы отключить вибрацию</string>
+
+    <string name="keep">продолжение</string>
+    <string name="theme">Тема</string>
+    <string name="discover">Откройте для себя</string>
+    <string name="more">О</string>
+
+    <string name="magenta">Фиолетовый</string>
+    <string name="red">Красный</string>
+    <string name="pink">Розовый</string>
+    <string name="yellow">Желтый</string>
+    <string name="green">Зеленый</string>
+    <string name="blue">Синий</string>
+    <string name="black">Темный</string>
+
+    <string name="not_allow">Запрещено переключать темы во время вибрации</string>
+
+    <string name="bottom_bar_left">Частота</string>
+    <string name="bottom_bar_right">Высокий</string>
+
+    <string name="close">Отмена</string>
+
+    <string name="aboutDeveloper">Автор: github @xiaofeidev</string>
+    <string name="aboutXBB_Title">Об этом приложении:</string>
+
+    <string name="aboutXBB_OpenSource">
+          ▶ Нажмите здесь, чтобы просмотреть <a href="">исходный код приложения</a>.
+      </string>
+    <string name="aboutXBB_ScoreAndFeedback">
+          ▶ Нажмите здесь, чтобы <a href="">оценить или оставить отзыв</a>.
+      </string>
+    <string name="aboutXBB_Donate">
+          ▶ Вы также можете <a href="">пожертвовать</a> автора.
+      </string>
+
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
+    <string name="donateToast">Большое спасибо! Аккаунт автора в Alipay (такой же, как в WeChat) скопирован в буфер обмена</string>
+
+    <string name="about">О</string>
+
+    <string name="quit_hint">Нажмите еще раз, чтобы выйти.</string>
+</resources>
