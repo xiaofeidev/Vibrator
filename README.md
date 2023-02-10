@@ -8,7 +8,9 @@
 支持从通知栏控制振动
 主体功能基本完善
 本项目已使用 Kotlin 重构
-我会不定期更新，优化项目结构啥的，欢迎 Star、Fork、Issues~
+我会不定期更新，欢迎 Star
+
+安装包下载：[GooglePlay](https://play.google.com/store/apps/details?id=com.github.xiaofei_dev.vibrator)
 
 # 界面预览
 
