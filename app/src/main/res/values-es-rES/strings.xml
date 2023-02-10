@@ -2,10 +2,11 @@
 <resources>
     <string name="app_name">Vibrador</string>
     <string name="app_version">Vibrador V%1$s</string>
-    <string name="start_vibrate">Haz clic para vibrar</string>
-    <string name="stop_vibrate">Haz clic para detener la vibración</string>
-    <string name="remote_start_vibrate">Haz clic para vibrar</string>
-    <string name="remote_stop_vibrate">Haz clic para detener la vibración</string>
+    <string name="start_vibrate">Inicio</string>
+    <string name="stop_vibrate">Stop</string>
+
+    <string name="remote_start_vibrate">Inicio</string>
+    <string name="remote_stop_vibrate">Stop</string>
 
     <string name="keep">Continuado</string>
     <string name="theme">Tema</string>

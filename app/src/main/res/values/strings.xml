@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Vibrator</string>
     <string name="app_version">Vibrator V%1$s</string>
-    <string name="start_vibrate">Click to vibrate</string>
-    <string name="stop_vibrate">Click to stop vibration</string>
+    <string name="start_vibrate">Start</string>
+    <string name="stop_vibrate">Stop</string>
 
-    <string name="remote_start_vibrate">Click to vibrate</string>
-    <string name="remote_stop_vibrate">Click to stop vibration</string>
+    <string name="remote_start_vibrate">Start</string>
+    <string name="remote_stop_vibrate">Stop</string>
 
     <string name="keep">continued</string>
     <string name="theme">Theme</string>
