@@ -47,4 +47,5 @@
     <string name="about">關於</string>
 
     <string name="quit_hint">再按一次退出應用</string>
+    <string name="hint_keep">持續</string>
 </resources>

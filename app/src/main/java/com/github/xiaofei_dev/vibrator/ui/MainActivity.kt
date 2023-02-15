@@ -12,14 +12,16 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
+import android.os.VibratorManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
 import android.widget.RemoteViews
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -73,6 +75,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    val onBackPressedCallback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            val mNowTime = System.currentTimeMillis()//记录本次按键时刻
+            if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
+                Toast.makeText(this@MainActivity, R.string.quit_hint, Toast.LENGTH_SHORT).show()
+                mPressedTime = mNowTime
+            } else {
+                //退出程序
+                if (mVibratorUtil?.isVibrate?:false) {
+                    isInApp = false
+                    mVibratorUtil?.stopVibrate()
+                    textAction.setText(R.string.start_vibrate)
+                    setBottomBarVisibility()
+                    mAnimator?.cancel()
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(this)
@@ -87,8 +110,14 @@ class MainActivity : AppCompatActivity() {
             mIntensity = 1
         }
         setVibratePattern(mIntensity)
-        mVibratorUtil = VibratorUtil(getSystemService(Service.VIBRATOR_SERVICE) as Vibrator)
+
+        if (Build.VERSION.SDK_INT >= 31){
+            mVibratorUtil = VibratorUtil((getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager).defaultVibrator)
+        } else{
+            mVibratorUtil = VibratorUtil(getSystemService(Service.VIBRATOR_SERVICE) as Vibrator)
+        }
         AppStatus.mNotThemeChange = true
+        //初始化 View
         initViews()
 
         val filter = IntentFilter("android.intent.action.SCREEN_OFF")
@@ -96,6 +125,8 @@ class MainActivity : AppCompatActivity() {
         filter.addAction("com.github.xiaofei_dev.vibrator.close")
         mMyRecever = MyReceiver()
         registerReceiver(mMyRecever, filter)
+
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     //加载广告
@@ -131,35 +162,17 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
-        val mNowTime = System.currentTimeMillis()//记录本次按键时刻
-        if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
-            Toast.makeText(this, R.string.quit_hint, Toast.LENGTH_SHORT).show()
-            mPressedTime = mNowTime
-        } else {
-            //退出程序
-            if (mVibratorUtil?.isVibrate?:false) {
-                isInApp = false
-                mVibratorUtil?.stopVibrate()
-                textHint.setText(R.string.start_vibrate)
-                setBottomBarVisibility()
-                mAnimator?.cancel()
-            }
-            super.onBackPressed()
-        }
-    }
-
     //加载菜单资源
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        val item = menu.findItem(R.id.keep)
-        item.isChecked = isChecked
+        /*val item = menu.findItem(R.id.keep)
+        item.isChecked = isChecked*/
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.keep -> {
+            /*R.id.keep -> {
                 if (item.isChecked) {
                     isChecked = false
                     item.isChecked = isChecked
@@ -171,7 +184,7 @@ class MainActivity : AppCompatActivity() {
                     mVibrateMode = VibratorUtil.KEEP
                     setBottomBarVisibility()
                 }
-            }
+            }*/
             R.id.theme -> {
                 val dialog = AlertDialog.Builder(this, R.style.Dialog)
                         .setTitle(getString(R.string.theme))
@@ -195,7 +208,7 @@ class MainActivity : AppCompatActivity() {
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && mVibratorUtil?.isVibrate?:false) {
                 isInApp = false
                 mVibratorUtil?.stopVibrate()
-                textHint.setText(R.string.start_vibrate)
+                textAction.setText(R.string.start_vibrate)
                 mAnimator?.cancel()
                 setBottomBarVisibility()
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
@@ -205,7 +218,7 @@ class MainActivity : AppCompatActivity() {
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.action" && !(mVibratorUtil?.isVibrate?:false)) {
                 isInApp = true
                 mVibratorUtil?.vibrate(mVibrateMode)
-                textHint.setText(R.string.stop_vibrate)
+                textAction.setText(R.string.stop_vibrate)
                 mAnimator?.start()
                 setBottomBarVisibility()
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
@@ -215,7 +228,7 @@ class MainActivity : AppCompatActivity() {
             } else if (intent.action == "com.github.xiaofei_dev.vibrator.close") {
                 isInApp = false
                 mVibratorUtil?.stopVibrate()
-                textHint.setText(R.string.start_vibrate)
+                textAction.setText(R.string.start_vibrate)
                 mAnimator?.cancel()
                 setBottomBarVisibility()
                 nm?.cancelAll()
@@ -230,7 +243,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         setSupportActionBar(toolbar)
-        setBottomBarVisibility()
+        //setBottomBarVisibility()
 
         seekBar.progress = mProgress
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -247,6 +260,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
+        //CheckBox 设置
+        isKeep?.isChecked = isChecked
+        isKeep?.setOnClickListener { v ->
+            if (v is CheckBox){
+                isChecked = v.isChecked
+                mVibrateMode = if (v.isChecked){
+                    VibratorUtil.KEEP
+                } else {
+                    VibratorUtil.INTERRUPT
+                }
+            }
+        }
 
         //发出去通知
         if(Build.VERSION.SDK_INT >= 24){
@@ -276,18 +301,18 @@ class MainActivity : AppCompatActivity() {
             sendNotification()
         }
 
-        textHint.setOnClickListener {
+        textAction.setOnClickListener {
             if (!(mVibratorUtil?.isVibrate?:false)) {
                 isInApp = true
                 mVibratorUtil?.vibrate(mVibrateMode)
-                textHint.setText(R.string.stop_vibrate)
+                textAction.setText(R.string.stop_vibrate)
                 setBottomBarVisibility()
                 mAnimator?.start()
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_stop_vibrate))
             } else {
                 isInApp = false
                 mVibratorUtil?.stopVibrate()
-                textHint.setText(R.string.start_vibrate)
+                textAction.setText(R.string.start_vibrate)
                 setBottomBarVisibility()
                 mAnimator?.cancel()
                 mRemoteViews?.setTextViewText(R.id.action, getString(R.string.remote_start_vibrate))
@@ -298,11 +323,11 @@ class MainActivity : AppCompatActivity() {
         }
         ////////////////发通知结束
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
-        mAnimator?.setTarget(textHint)
+        mAnimator?.setTarget(textAction)
     }
 
     private fun setBottomBarVisibility() {
-        if (mVibratorUtil?.isVibrate?:false || isChecked) {
+        if (mVibratorUtil?.isVibrate?:false) {
             bottomBar.visibility = View.GONE
         } else {
             bottomBar.visibility = View.VISIBLE

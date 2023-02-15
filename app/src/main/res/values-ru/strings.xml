@@ -47,4 +47,5 @@
     <string name="about">О</string>
 
     <string name="quit_hint">Нажмите еще раз, чтобы выйти.</string>
+    <string name="hint_keep">держать</string>
 </resources>

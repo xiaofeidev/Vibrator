@@ -47,4 +47,5 @@
     <string name="about">Acerca</string>
 
     <string name="quit_hint">Presiónalo de nuevo para salir.</string>
+    <string name="hint_keep">guarda</string>
 </resources>

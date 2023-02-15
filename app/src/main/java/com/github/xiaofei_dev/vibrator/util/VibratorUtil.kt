@@ -40,19 +40,11 @@ class VibratorUtil(private val mVibrator: Vibrator) {
         isVibrate = true
         when (mode) {
             INTERRUPT ->
-                if (Build.VERSION.SDK_INT >= 21){
-                    //适配在高版本系统上无法后台震动的问题
-                    mVibrator.vibrate(mPattern, 0, mAudioAttributes)
-                }else{
-                    mVibrator.vibrate(mPattern, 0)
-                }
+                //适配在高版本系统上无法后台震动的问题
+                mVibrator.vibrate(mPattern, 0, mAudioAttributes)
             KEEP ->
-                if (Build.VERSION.SDK_INT >= 21){
-                    //适配在高版本系统上无法后台震动的问题
-                    mVibrator.vibrate(mPatternKeep, 0, mAudioAttributes)
-                }else{
-                    mVibrator.vibrate(mPatternKeep, 0)
-                }
+                //适配在高版本系统上无法后台震动的问题
+                mVibrator.vibrate(mPatternKeep, 0, mAudioAttributes)
         }
     }
 

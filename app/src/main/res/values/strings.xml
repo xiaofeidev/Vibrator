@@ -22,7 +22,7 @@
 
     <string name="not_allow">It is not allowed to switch themes during vibration</string>
 
-    <string name="bottom_bar_left">Frequency</string>
+    <string name="bottom_bar_left">FREQ</string>
     <string name="bottom_bar_right">High</string>
 
     <string name="close">Cancel</string>
@@ -48,7 +48,10 @@
 
     <string name="quit_hint">Press it again to exit.</string>
 
+    <string name="hint_keep">keep</string>
+
     <string name="banner_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_id_release1" translatable="false">ca-app-pub-9708198084566779/3296344656</string>
     <string name="banner_id_release2" translatable="false">ca-app-pub-9708198084566779/1845577908</string>
+
 </resources>

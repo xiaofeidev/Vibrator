@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Vibrator</string>
+    <string name="app_version">Vibrator V%1$s</string>
+    <string name="start_vibrate">Start</string>
+    <string name="stop_vibrate">Stoppen</string>
+
+    <string name="remote_start_vibrate">Start</string>
+    <string name="remote_stop_vibrate">Stoppen</string>
+
+    <string name="keep">fortgesetzt</string>
+    <string name="theme">Thema</string>
+    <string name="discover">Entdecken</string>
+    <string name="more">Um</string>
+
+    <string name="magenta">Lila</string>
+    <string name="red">Rot</string>
+    <string name="pink">Rosa</string>
+    <string name="yellow">Gelb</string>
+    <string name="green">Grün</string>
+    <string name="blue">Blau</string>
+    <string name="black">Dunkel</string>
+
+    <string name="not_allow">Es ist nicht erlaubt, Themen während der Vibration zu wechseln</string>
+
+    <string name="bottom_bar_left">Frequenz</string>
+    <string name="bottom_bar_right">Hoch</string>
+
+    <string name="close">Stornieren</string>
+
+    <string name="aboutDeveloper">Autor: github \@xiaofeidev</string>
+    <string name="aboutXBB_Title">Über diese Anwendung:</string>
+
+    <string name="aboutXBB_OpenSource">▶ Klicken Sie hier, um zu besuchen<a href="">APP-Quellcode</a>.</string>
+    <string name="aboutXBB_ScoreAndFeedback">▶ Klicken Sie hier, um<a href="">Bewerten oder Feedback</a>.</string>
+    <string name="aboutXBB_Donate">▶ Sie können auch<a href="">spenden</a>der Autor.</string>
+
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
+    <string name="donateToast">Vielen Dank! Das Alipay-Konto des Autors (wie WeChat) wurde in die Zwischenablage kopiert</string>
+
+    <string name="about">Um</string>
+
+    <string name="quit_hint">Zum Beenden erneut drücken.</string>
+    <string name="hint_keep">halten.</string>
+</resources>

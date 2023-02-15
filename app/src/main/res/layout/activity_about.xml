@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:theme="@style/blackTextColor">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/blackTextColor">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
     </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbarLayout"
         android:background="@color/whiteLow"
         android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:layout_marginTop="?attr/actionBarSize">
-        <!--android:layout_marginTop="?attr/actionBarSize"-->
+        android:paddingBottom="30dp">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -44,85 +47,80 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center"
             android:text="@string/app_version"
+            android:textSize="@dimen/default_text"
             android:clickable="true"
             android:focusable="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout">
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_Title"
-                android:textStyle="bold"/>
-
-            <!--<TextView
-                android:id="@+id/itemOpenSource"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state_selector"
-                android:clickable="true"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_OpenSource"/>-->
-
-            <TextView
-                android:id="@+id/itemScoreAndFeedback"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state_selector"
-                android:clickable="true"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_ScoreAndFeedback"/>
-
-            <!--<TextView
-                android:id="@+id/itemDonate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state_selector"
-                android:clickable="true"
-                android:padding="8dp"
-                android:text="@string/aboutXBB_Donate"/>-->
-        </RadioGroup>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativeLayout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/radioGroup"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/aboutDeveloper" />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="@string/aboutXBB_Title"
+            android:textSize="@dimen/default_text"
+            android:textStyle="bold"/>
+
+        <!--<TextView
+            android:id="@+id/itemOpenSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_state_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:text="@string/aboutXBB_OpenSource"/>-->
+
+        <TextView
+            android:id="@+id/itemScoreAndFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_state_selector"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:textSize="@dimen/default_text"
+            android:text="@string/aboutXBB_ScoreAndFeedback"/>
+
+        <!--<TextView
+            android:id="@+id/itemDonate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_state_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:text="@string/aboutXBB_Donate"/>-->
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/default_text"
+        android:text="@string/aboutDeveloper" />
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/bottomView"
+        android:layout_marginBottom="20dp"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintBottom_toBottomOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_id_release2"/>
-
-    <View
-        android:id="@+id/bottomView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
-</RelativeLayout>
+        ads:adUnitId="@string/banner_id_release2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

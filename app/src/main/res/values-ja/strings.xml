@@ -47,4 +47,5 @@
     <string name="about">概要</string>
 
     <string name="quit_hint">もう一度押すと終了します。</string>
+    <string name="hint_keep">保つ</string>
 </resources>

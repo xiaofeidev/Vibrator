@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Vibreur</string>
+    <string name="app_version">Vibromasseur V%1$s</string>
+    <string name="start_vibrate">Commencer</string>
+    <string name="stop_vibrate">Arrêt</string>
+
+    <string name="remote_start_vibrate">Commencer</string>
+    <string name="remote_stop_vibrate">Arrêt</string>
+
+    <string name="keep">a continué</string>
+    <string name="theme">Thème</string>
+    <string name="discover">Découvrir</string>
+    <string name="more">À propos</string>
+
+    <string name="magenta">Violet</string>
+    <string name="red">Rouge</string>
+    <string name="pink">Rose</string>
+    <string name="yellow">Jaune</string>
+    <string name="green">Vert</string>
+    <string name="blue">Bleu</string>
+    <string name="black">Sombre</string>
+
+    <string name="not_allow">Il n\'est pas permis de changer de thème pendant les vibrations</string>
+
+    <string name="bottom_bar_left">Fréquence</string>
+    <string name="bottom_bar_right">Haut</string>
+
+    <string name="close">Annuler</string>
+
+    <string name="aboutDeveloper"><![CDATA[Auteur : github \@xiaofeidev]]></string>
+    <string name="aboutXBB_Title"><![CDATA[À propos de cette application :]]></string>
+
+    <string name="aboutXBB_OpenSource">▶ Cliquez ici pour visiter<a href="">Code source de l\'APP</a>.</string>
+    <string name="aboutXBB_ScoreAndFeedback">▶ Cliquez ici pour<a href="">Note ou commentaires</a>.</string>
+    <string name="aboutXBB_Donate">▶ Vous pouvez également<a href="">donner</a>l\'auteur.</string>
+
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
+    <string name="donateToast">Merci beaucoup! Le compte Alipay de l\'auteur (identique à WeChat) a été copié dans le presse-papiers</string>
+
+    <string name="about">À propos</string>
+
+    <string name="quit_hint">Appuyez à nouveau dessus pour quitter.</string>
+    <string name="hint_keep">garder</string>
+</resources>

@@ -6,7 +6,6 @@
     android:layout_height="68dp"
     android:orientation="horizontal"
     android:background="@android:color/transparent">
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="40dp"
@@ -23,19 +22,19 @@
         android:gravity="center"
         android:layout_weight="1"
         android:clickable="true"
+        android:focusable="true"
         android:textSize="16sp"
         android:textColor="@color/gery"
-        tools:text="@string/remote_start_vibrate"/>
+        tools:text="@string/remote_start_vibrate" />
 
     <ImageButton
         android:id="@+id/close"
         android:layout_width="40dp"
         android:layout_height="68dp"
-        android:paddingBottom="22dp"
-        android:paddingTop="22dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:src="@drawable/close"
         android:scaleType="centerInside"/>
-
 </LinearLayout>
