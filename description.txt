@@ -1,5 +1,5 @@
 
-Vibrator Strong & Massager Fun
+Vibrator Strong & Fun Vibration
 
 Realize the massage function by calling the vibration motor of the mobile phone.
 
