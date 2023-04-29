@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Vibreur</string>
-    <string name="app_version">Vibromasseur V%1$s</string>
     <string name="start_vibrate">Commencer</string>
     <string name="stop_vibrate">Arrêt</string>
 

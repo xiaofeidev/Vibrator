@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">진동기</string>
-    <string name="app_version">진동기 V%1$s</string>
     <string name="start_vibrate">시작</string>
     <string name="stop_vibrate">멈추다</string>
 

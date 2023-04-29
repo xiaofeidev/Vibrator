@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Вибратор</string>
-    <string name="app_version">Вибратор V%1$s</string>
     <string name="start_vibrate">Начало</string>
     <string name="stop_vibrate">Остановить</string>
 

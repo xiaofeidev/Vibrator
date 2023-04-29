@@ -3,8 +3,8 @@ ext {
             compileSdkVersion: 33,
             minSdkVersion    : 21,
             targetSdkVersion : 33,
-            versionCode      : 33,
-            versionName      : "3.2.1",
+            versionCode      : 34,
+            versionName      : "3.2.2",
             appId            : "com.github.xiaofei_dev.vibrator"
     ]
 }

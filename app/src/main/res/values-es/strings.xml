@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vibrador</string>
-    <string name="app_version">Vibrador V%1$s</string>
     <string name="start_vibrate">Inicio</string>
     <string name="stop_vibrate">Stop</string>
 

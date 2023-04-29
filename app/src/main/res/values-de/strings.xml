@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Vibrator</string>
-    <string name="app_version">Vibrator V%1$s</string>
     <string name="start_vibrate">Start</string>
     <string name="stop_vibrate">Stoppen</string>
 
