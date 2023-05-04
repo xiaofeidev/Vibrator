@@ -16,6 +16,7 @@ import android.os.VibratorManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
 import android.widget.CheckBox
 import android.widget.RemoteViews
 import android.widget.SeekBar
@@ -27,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.extension.setTheme
@@ -35,13 +37,17 @@ import com.github.xiaofei_dev.vibrator.singleton.AppStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 import com.github.xiaofei_dev.vibrator.singleton.Preference.isChecked
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mProgress
+import com.github.xiaofei_dev.vibrator.singleton.Preference.mPurchaseStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mTheme
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mVibrateMode
+import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.find
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +63,18 @@ class MainActivity : AppCompatActivity() {
     private var mAnimator: Animator? = null
 
     private var mPendingIntentFlag = PendingIntent.FLAG_UPDATE_CURRENT
+
+    private val mBillingLogic = BillingLogic(lifecycleScope) {
+        mPurchaseStatus = PurchaseStatus.BOUGHT
+        destroyAdView()
+        if(this@MainActivity::mMenu.isInitialized){
+            if (mMenu.findItem(R.id.removead) != null){
+                mMenu.removeItem(R.id.removead)
+            }
+        }
+    }
+
+    private var isAdViewDestroyed = false
 
     val requestPermissionLauncher =
         registerForActivityResult(
@@ -100,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(this)
         setContentView(R.layout.activity_main)
+        checkPurchaseStatus()
         initAd()
         if (Build.VERSION.SDK_INT >= 31){
             mPendingIntentFlag = mPendingIntentFlag or PendingIntent.FLAG_IMMUTABLE
@@ -129,8 +148,75 @@ class MainActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (mPurchaseStatus != PurchaseStatus.BOUGHT) {
+            lifecycleScope.launch {
+                mBillingLogic.checkActiveBillingCheckReady(this@MainActivity){
+                    mPurchaseStatus = PurchaseStatus.BOUGHT
+                    destroyAdView()
+                    if(this@MainActivity::mMenu.isInitialized){
+                        if (mMenu.findItem(R.id.removead) != null){
+                            mMenu.removeItem(R.id.removead)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //检查用户的应用内购状态
+    private fun checkPurchaseStatus(){
+        mBillingLogic.init(this)
+        when (mPurchaseStatus) {
+            PurchaseStatus.UNKNOWN -> {
+                lifecycleScope.launch {
+                    mBillingLogic.isBoughtCheckReady(
+                        this@MainActivity,
+                        tureAction = {
+                            mPurchaseStatus = PurchaseStatus.BOUGHT
+                            destroyAdView()
+                            if(this@MainActivity::mMenu.isInitialized){
+                                if (mMenu.findItem(R.id.removead) != null){
+                                    mMenu.removeItem(R.id.removead)
+                                }
+                            }
+                        },
+                        falseAction = {
+                            mPurchaseStatus = PurchaseStatus.NO_BOUGHT
+                        }
+                    )
+                }
+            }
+            PurchaseStatus.BOUGHT -> {//即使当前状态是已购买，也有可能在 play console 中被退款而移除商品拥有权限
+                destroyAdView()
+                if(this@MainActivity::mMenu.isInitialized){
+                    if (mMenu.findItem(R.id.removead) != null){
+                        mMenu.removeItem(R.id.removead)
+                    }
+                }
+
+                //冗余的检查以应对发生退款之类的情况
+                lifecycleScope.launch {
+                    mBillingLogic.isBoughtCheckReady(
+                        this@MainActivity,
+                        tureAction = {},
+                        falseAction = {
+                            mPurchaseStatus = PurchaseStatus.NO_BOUGHT
+                        })
+                }
+            }
+            else -> {//PurchaseStatus.NO_BOUGHT
+                //什么都不用做？
+            }
+        }
+    }
+
     //加载广告
     private fun initAd(){
+        if (mPurchaseStatus == PurchaseStatus.BOUGHT){
+            return
+        }
         //初始化 AdMob
         if (App.adState != AdapterStatus.State.READY){
             MobileAds.initialize(this) {
@@ -145,8 +231,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadAd(){
+        if (mPurchaseStatus == PurchaseStatus.BOUGHT){
+            return
+        }
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+    }
+
+    private fun destroyAdView() {
+        if (adView != null && !isAdViewDestroyed) {
+            adView.visibility = GONE
+            adView.destroy()
+            isAdViewDestroyed = true
+        }
     }
 
     override fun onDestroy() {
@@ -162,29 +259,24 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+
+    private lateinit var mMenu: Menu
     //加载菜单资源
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        /*val item = menu.findItem(R.id.keep)
-        item.isChecked = isChecked*/
+        mMenu = menu
+        if (mPurchaseStatus == PurchaseStatus.BOUGHT){
+            mMenu.removeItem(R.id.removead)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            /*R.id.keep -> {
-                if (item.isChecked) {
-                    isChecked = false
-                    item.isChecked = isChecked
-                    mVibrateMode = VibratorUtil.INTERRUPT
-                    setBottomBarVisibility()
-                } else {
-                    isChecked = true
-                    item.isChecked = isChecked
-                    mVibrateMode = VibratorUtil.KEEP
-                    setBottomBarVisibility()
-                }
-            }*/
+            R.id.removead -> {
+                //购买去除广告
+                mBillingLogic.billingConnect(this)
+            }
             R.id.theme -> {
                 val dialog = AlertDialog.Builder(this, R.style.Dialog)
                         .setTitle(getString(R.string.theme))

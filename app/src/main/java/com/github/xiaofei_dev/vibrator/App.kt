@@ -1,5 +1,7 @@
 package com.github.xiaofei_dev.vibrator
 import android.app.Application
+import com.github.xiaofei_dev.vibrator.singleton.Preference
+import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 
@@ -18,9 +20,11 @@ class App : Application() {
         super.onCreate()
         instance = this
 
-        MobileAds.initialize(this) {
-            it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
-                adState = it
+        if (Preference.mPurchaseStatus != PurchaseStatus.BOUGHT){
+            MobileAds.initialize(this) {
+                it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
+                    adState = it
+                }
             }
         }
     }

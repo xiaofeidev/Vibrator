@@ -3,6 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 def app = rootProject.ext.android
+
+def localProperties = new Properties()
+try {
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+} catch (Exception e) {
+    logger.warn("No Local Properties File Found!")
+}
+
 android {
     compileSdkVersion app.compileSdkVersion
     defaultConfig {
@@ -13,19 +21,44 @@ android {
         versionName app.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        if (!localProperties['base64EncodedPublicKey']) {
+            logger.warn('base64EncodedPublicKey must be set for signature verification. ' +
+                    'You can add it to local.properties once you have gotten it from Play. ' +
+                    'Example: base64EncodedPublicKey=[key value]')
+        }
+        buildConfigField("String", "BASE64_ENCODED_PUBLIC_KEY", "\"" + localProperties['base64EncodedPublicKey'] + "\"")
     }
+
+    signingConfigs {
+        debug {
+            keyAlias 'xiaofei'
+            keyPassword '555888'
+            storeFile file('C:\\AndroidProject\\xiaofei.jks')
+            storePassword '555888'
+        }
+        release {
+            keyAlias 'xiaofei'
+            keyPassword '555888'
+            storeFile file('C:\\AndroidProject\\xiaofei.jks')
+            storePassword '555888'
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled true //是否混淆
             shrinkResources true //是否去除无效的资源文件
             zipAlignEnabled true// Zipalign优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -43,5 +76,13 @@ dependencies {
     //Anko （Kotlin 库）
     implementation "org.jetbrains.anko:anko-common:$anko_version"
 
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
+
+    def billing_version = "5.1.0"
+
+    implementation "com.android.billingclient:billing:$billing_version"
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
 }

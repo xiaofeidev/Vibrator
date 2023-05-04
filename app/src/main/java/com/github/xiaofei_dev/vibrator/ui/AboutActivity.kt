@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.extension.setTheme
+import com.github.xiaofei_dev.vibrator.singleton.Preference
+import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.github.xiaofei_dev.vibrator.util.OpenUtil
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -59,6 +61,9 @@ class AboutActivity : AppCompatActivity(),
 
     //加载广告
     private fun initAd(){
+        if (Preference.mPurchaseStatus == PurchaseStatus.BOUGHT){
+            return
+        }
         //初始化 AdMob
         //MobileAds.getInitializationStatus()?.adapterStatusMap?.get(MobileAds::class.qualifiedName)
         if (App.adState != AdapterStatus.State.READY){
