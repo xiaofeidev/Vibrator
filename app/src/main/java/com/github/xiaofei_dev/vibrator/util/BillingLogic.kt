@@ -1,12 +1,9 @@
-package com.github.xiaofei_dev.vibrator.ui
+package com.github.xiaofei_dev.vibrator.util
 
 import android.app.Activity
 import android.content.Context
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.BillingResponseCode.*
-import com.github.xiaofei_dev.vibrator.singleton.Preference
-import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
-import com.github.xiaofei_dev.vibrator.util.Security
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -142,6 +139,7 @@ class BillingLogic(
                 //如需得知商品订单退款等相关信息，则必须通过访问 Google Play Developer API
                 //由于调用 Google Play Developer API 需要使用自己的访问令牌
                 //而为了防止访问令牌泄露，我们最好从自己的服务端调用 Google Play Developer API
+                //【注意】上面的的说法存疑，后来验证好像仅通过 play 结算系统便可过滤掉退款的情况
                 if (purchase.products.getOrNull(0) == productID &&
                     purchase.purchaseState == Purchase.PurchaseState.PURCHASED &&
                     purchase.isAcknowledged &&

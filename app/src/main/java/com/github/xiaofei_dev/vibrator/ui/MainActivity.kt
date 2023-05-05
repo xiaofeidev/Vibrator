@@ -41,6 +41,7 @@ import com.github.xiaofei_dev.vibrator.singleton.Preference.mPurchaseStatus
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mTheme
 import com.github.xiaofei_dev.vibrator.singleton.Preference.mVibrateMode
 import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
+import com.github.xiaofei_dev.vibrator.util.BillingLogic
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
 import com.google.android.gms.ads.AdRequest
