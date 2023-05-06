@@ -9,7 +9,7 @@
 
     <string name="keep">continued</string>
     <string name="theme">Theme</string>
-    <string name="remove_ad" translatable="false">Remove AD</string>
+    <string name="remove_ad">Remove AD</string>
     <string name="discover">Discover</string>
     <string name="more">About</string>
 

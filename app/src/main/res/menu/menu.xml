@@ -9,7 +9,7 @@
         android:id="@+id/removead"
         android:title="@string/remove_ad"
         android:icon="@drawable/ic_remove_ad"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/theme"
