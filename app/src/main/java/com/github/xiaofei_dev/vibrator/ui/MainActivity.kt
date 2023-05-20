@@ -44,9 +44,14 @@ import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.github.xiaofei_dev.vibrator.util.BillingLogic
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.find
@@ -82,21 +87,15 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                // Permission is granted. Continue the action or workflow in your
-                // app.
                 sendNotification()
             } else {
-                // Explain to the user that the feature is unavailable because the
-                // feature requires a permission that the user has denied. At the
-                // same time, respect the user's decision. Don't link to system
-                // settings in an effort to convince the user to change their
-                // decision.
+
             }
         }
 
     val onBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            val mNowTime = System.currentTimeMillis()//记录本次按键时刻
+            /*val mNowTime = System.currentTimeMillis()//记录本次按键时刻
             if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
                 Toast.makeText(this@MainActivity, R.string.quit_hint, Toast.LENGTH_SHORT).show()
                 mPressedTime = mNowTime
@@ -111,12 +110,108 @@ class MainActivity : AppCompatActivity() {
                 }
                 isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
+            }*/
+            //退出程序
+            if (mVibratorUtil?.isVibrate?:false) {
+                isInApp = false
+                mVibratorUtil?.stopVibrate()
+                textAction.setText(R.string.start_vibrate)
+                setBottomBarVisibility()
+                mAnimator?.cancel()
             }
+            isEnabled = false
+            onBackPressedDispatcher.onBackPressed()
+
+            /*if (mPurchaseStatus != PurchaseStatus.BOUGHT && mInterstitialAd != null && !isShowed) {
+                //展示广告
+                showAD()
+            } else {
+                //直接退出程序
+                if (mVibratorUtil?.isVibrate?:false) {
+                    isInApp = false
+                    mVibratorUtil?.stopVibrate()
+                    textAction.setText(R.string.start_vibrate)
+                    setBottomBarVisibility()
+                    mAnimator?.cancel()
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+            }*/
         }
     }
 
+    /*private var mInterstitialAd: InterstitialAd? = null
+    private var isShowed = false
+    private fun loadAd(retryTime: Int) {
+        if (mPurchaseStatus == PurchaseStatus.BOUGHT){
+            return
+        }
+        var adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(this,getString(R.string.inter_id_release1), adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                //Log.d(TAG, adError?.toString())
+                mInterstitialAd = null
+                if (retryTime > 0 && !isFinishing) {
+                    loadAd(retryTime - 1)
+                }
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                //广告加载成功
+                if (!isFinishing) {
+                    mInterstitialAd = interstitialAd
+                    mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                        override fun onAdClicked() {
+                            // Called when a click is recorded for an ad.
+                            //Log.d(TAG, "Ad was clicked.")
+                        }
+
+                        override fun onAdDismissedFullScreenContent() {
+                            // Called when ad is dismissed.
+                            //Log.d(TAG, "Ad dismissed fullscreen content.")
+                            //mInterstitialAd = null
+                            //广告被用户手动关闭？退出应用
+                            isShowed = true
+                            onBackPressedDispatcher.onBackPressed()
+                        }
+
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            // Called when ad fails to show.
+                            //Log.e(TAG, "Ad failed to show fullscreen content.")
+                            //mInterstitialAd = null
+                            //广告展示错误？退出应用
+                            isShowed = true
+                            onBackPressedDispatcher.onBackPressed()
+                        }
+
+                        override fun onAdImpression() {
+                            // Called when an impression is recorded for an ad.
+                            //Log.d(TAG, "Ad recorded an impression.")
+                        }
+
+                        override fun onAdShowedFullScreenContent() {
+                            // Called when ad is shown.
+                            //Log.d(TAG, "Ad showed fullscreen content.")
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun showAD() {
+        if (mPurchaseStatus == PurchaseStatus.BOUGHT){
+            return
+        }
+        if (mInterstitialAd != null && !isFinishing) {
+            mInterstitialAd?.show(this)
+        }
+    }*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //loadAd(3)
         setTheme(this)
         setContentView(R.layout.activity_main)
         checkPurchaseStatus()
@@ -501,9 +596,10 @@ class MainActivity : AppCompatActivity() {
                 .setSound(null)
                 .setOnlyAlertOnce(true)//成功使通知声音只响一次！
                 .setOngoing(true)
-                .setContent(mRemoteViews)
+                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(mRemoteViews)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .priority = NotificationCompat.PRIORITY_DEFAULT
+                .priority = NotificationCompat.PRIORITY_HIGH
 
 
         nm = NotificationManagerCompat.from(this)

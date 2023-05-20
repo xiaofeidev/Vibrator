@@ -3,22 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="48dp"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:background="@android:color/transparent">
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageView"
         android:layout_width="40dp"
-        android:layout_height="68dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
+        android:layout_height="match_parent"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_notification"/>
+        android:src="@drawable/ic_notification"/>-->
 
     <TextView
         android:id="@+id/action"
         android:layout_width="0dp"
-        android:layout_height="68dp"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:layout_weight="1"
         android:clickable="true"
@@ -30,9 +31,9 @@
     <ImageButton
         android:id="@+id/close"
         android:layout_width="40dp"
-        android:layout_height="68dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
+        android:layout_height="match_parent"
+        android:paddingBottom="11dp"
+        android:paddingTop="11dp"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
         android:src="@drawable/close"

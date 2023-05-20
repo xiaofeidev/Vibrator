@@ -54,5 +54,7 @@
     <string name="banner_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_id_release1" translatable="false">ca-app-pub-9708198084566779/3296344656</string>
     <string name="banner_id_release2" translatable="false">ca-app-pub-9708198084566779/1845577908</string>
+    <string name="inter_id_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="inter_id_release1" translatable="false">ca-app-pub-9708198084566779/2826088592</string>
 
 </resources>
