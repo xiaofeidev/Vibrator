@@ -3,6 +3,7 @@
     <string name="app_version" translatable="false">Vibrator V%1$s</string>
     <string name="start_vibrate">Start</string>
     <string name="stop_vibrate">Stop</string>
+    <string name="btn_exit">Exit</string>
 
     <string name="remote_start_vibrate">Start</string>
     <string name="remote_stop_vibrate">Stop</string>
@@ -56,5 +57,4 @@
     <string name="banner_id_release2" translatable="false">ca-app-pub-9708198084566779/1845577908</string>
     <string name="inter_id_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="inter_id_release1" translatable="false">ca-app-pub-9708198084566779/2826088592</string>
-
 </resources>

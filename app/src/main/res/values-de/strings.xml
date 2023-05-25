@@ -2,6 +2,7 @@
     <string name="start_vibrate">Start</string>
     <string name="stop_vibrate">Stoppen</string>
 
+    <string name="btn_exit">Beenden</string>
     <string name="remote_start_vibrate">Start</string>
     <string name="remote_stop_vibrate">Stoppen</string>
 

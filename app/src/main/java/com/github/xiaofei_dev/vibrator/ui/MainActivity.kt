@@ -13,11 +13,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.CheckBox
 import android.widget.RemoteViews
 import android.widget.SeekBar
@@ -25,7 +25,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -45,7 +44,9 @@ import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.github.xiaofei_dev.vibrator.util.BillingLogic
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,7 +55,7 @@ import org.jetbrains.anko.find
 
 
 class MainActivity : AppCompatActivity() {
-    private var mPressedTime: Long = 0
+    //private var mPressedTime: Long = 0
     private var mVibratorUtil: VibratorUtil? = null
     private var mMyRecever: MyReceiver? = null
     private var mRemoteViews: RemoteViews? = null
@@ -90,12 +91,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    var adShowing = false
+    var adLoaded = false
     val onBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            /*val mNowTime = System.currentTimeMillis()//记录本次按键时刻
-            if (mNowTime - mPressedTime > 2000) {//比较两次按键时间差
-                Toast.makeText(this@MainActivity, R.string.quit_hint, Toast.LENGTH_SHORT).show()
-                mPressedTime = mNowTime
+            if (mPurchaseStatus != PurchaseStatus.BOUGHT && App.adState == AdapterStatus.State.READY && !adShowing){
+                // 展示广告
+                adShowing = true
+                layoutAD.visibility = VISIBLE
+                if (adLoaded) {
+                    adView.resume()
+                } else {
+                    loadAd()
+                }
             } else {
                 //退出程序
                 if (mVibratorUtil?.isVibrate?:false) {
@@ -107,17 +115,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
-            }*/
-            //退出程序
-            if (mVibratorUtil?.isVibrate?:false) {
-                isInApp = false
-                mVibratorUtil?.stopVibrate()
-                textAction.setText(R.string.start_vibrate)
-                setBottomBarVisibility()
-                mAnimator?.cancel()
             }
-            isEnabled = false
-            onBackPressedDispatcher.onBackPressed()
 
             /*if (mPurchaseStatus != PurchaseStatus.BOUGHT && mInterstitialAd != null && !isShowed) {
                 //展示广告
@@ -311,16 +309,49 @@ class MainActivity : AppCompatActivity() {
         if (mPurchaseStatus == PurchaseStatus.BOUGHT){
             return
         }
+
+        adView.adListener = object: AdListener() {
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+                adLoaded = false
+            }
+
+            override fun onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                adLoaded = true
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+        }
         //初始化 AdMob
         if (App.adState != AdapterStatus.State.READY){
             MobileAds.initialize(this) {
                 it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
                     App.adState = it
                     loadAd()
+                    adView.pause()
                 }
             }
         } else {
             loadAd()
+            adView.pause()
         }
     }
 
@@ -333,11 +364,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun destroyAdView() {
-        if (adView != null && !isAdViewDestroyed) {
-            adView.visibility = GONE
-            adView.destroy()
-            isAdViewDestroyed = true
-        }
+//        if (adView != null && !isAdViewDestroyed) {
+//            adView.visibility = GONE
+//            adView.destroy()
+//            isAdViewDestroyed = true
+//        }
     }
 
     override fun onDestroy() {
@@ -510,6 +541,19 @@ class MainActivity : AppCompatActivity() {
         ////////////////发通知结束
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
         mAnimator?.setTarget(textAction)
+
+        btnExit.setOnClickListener {
+            onBackPressedCallback.isEnabled = false
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        btnBG.setOnClickListener {
+            if (adLoaded) {
+                adView.pause()
+            }
+            adShowing = false
+            layoutAD.visibility = INVISIBLE
+        }
     }
 
     private fun setBottomBarVisibility() {
