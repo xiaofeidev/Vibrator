@@ -26,7 +26,7 @@ class AboutActivity : AppCompatActivity(),
         View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(this)
+        setTheme()
         setContentView(R.layout.activity_about)
         initAd()
         setSupportActionBar(toolbar)

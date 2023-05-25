@@ -3,6 +3,7 @@ package com.github.xiaofei_dev.vibrator.extension
 import android.app.Activity
 import android.content.Context
 import android.graphics.Point
+import androidx.appcompat.app.AppCompatActivity
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 
@@ -30,14 +31,16 @@ val Activity.screenHeight:Int
     }
 
 //设置主题
-fun Activity.setTheme(context: Context) {
+fun AppCompatActivity.setTheme() {
     when (Preference.mTheme) {
         R.style.AppTheme_Red,
         R.style.AppTheme_Pink,
         R.style.AppTheme_Yellow,
         R.style.AppTheme_Green,
         R.style.AppTheme_Blue,
-        R.style.AppTheme_Black -> context.setTheme(Preference.mTheme)
-        else -> context.setTheme(R.style.AppTheme)
+        R.style.AppTheme_Black -> setTheme(Preference.mTheme)
+        else -> setTheme(R.style.AppTheme)
     }
+
+    delegate.applyDayNight()
 }

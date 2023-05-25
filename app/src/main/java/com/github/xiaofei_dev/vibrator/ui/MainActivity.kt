@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,11 +21,11 @@ import android.view.View.GONE
 import android.widget.CheckBox
 import android.widget.RemoteViews
 import android.widget.SeekBar
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -44,17 +45,13 @@ import com.github.xiaofei_dev.vibrator.singleton.PurchaseStatus
 import com.github.xiaofei_dev.vibrator.util.BillingLogic
 import com.github.xiaofei_dev.vibrator.util.ToastUtil
 import com.github.xiaofei_dev.vibrator.util.VibratorUtil
-import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.find
+
 
 class MainActivity : AppCompatActivity() {
     private var mPressedTime: Long = 0
@@ -212,7 +209,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //loadAd(3)
-        setTheme(this)
+        //设置应用主题
+        setTheme()
         setContentView(R.layout.activity_main)
         checkPurchaseStatus()
         initAd()
@@ -542,7 +540,15 @@ class MainActivity : AppCompatActivity() {
             }
             dialog.cancel()
             window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-            recreate()
+            //recreate()
+            setTheme()
+            recreate();
+
+            /*val contextThemeWrapper = ContextThemeWrapper(this@MainActivity, mTheme)
+            val inflater = LayoutInflater.from(contextThemeWrapper)
+            val view = inflater.inflate(R.layout.activity_main, null)
+            setContentView(view)*/
+
             AppStatus.mNotThemeChange = false
         }
 
