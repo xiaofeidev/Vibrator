@@ -254,7 +254,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        adView.adListener = object: AdListener() {
+        /*adView.adListener = object: AdListener() {
             override fun onAdClicked() {
                 // Code to be executed when the user clicks on an ad.
             }
@@ -283,7 +283,7 @@ class MainActivity : AppCompatActivity() {
                 // Code to be executed when an ad opens an overlay that
                 // covers the screen.
             }
-        }
+        }*/
         //初始化 AdMob
         if (App.adState != AdapterStatus.State.READY){
             MobileAds.initialize(this) {
