@@ -31,6 +31,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.github.xiaofei_dev.vibrator.App
 import com.github.xiaofei_dev.vibrator.R
+import com.github.xiaofei_dev.vibrator.extension.hideSystemUINew
 import com.github.xiaofei_dev.vibrator.extension.setTheme
 import com.github.xiaofei_dev.vibrator.extension.yes
 import com.github.xiaofei_dev.vibrator.singleton.AppStatus
@@ -255,6 +256,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        //hideSystemUINew()
     }
 
     //检查用户的应用内购状态

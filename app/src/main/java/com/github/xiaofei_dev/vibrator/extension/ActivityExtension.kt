@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.github.xiaofei_dev.vibrator.R
 import com.github.xiaofei_dev.vibrator.singleton.Preference
 
@@ -43,4 +46,13 @@ fun AppCompatActivity.setTheme() {
     }
 
     delegate.applyDayNight()
+}
+
+fun AppCompatActivity.hideSystemUINew() {
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
 }
