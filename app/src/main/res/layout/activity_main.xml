@@ -98,7 +98,7 @@
               android:buttonTint="@android:color/white"/>
      </LinearLayout>
 
-     <!--<com.google.android.gms.ads.AdView
+     <com.google.android.gms.ads.AdView
          xmlns:ads="http://schemas.android.com/apk/res-auto"
          android:id="@+id/adView"
          android:layout_width="wrap_content"
@@ -108,9 +108,9 @@
          ads:layout_constraintEnd_toEndOf="parent"
          ads:layout_constraintBottom_toTopOf="@id/bottomBar"
          ads:adSize="BANNER"
-         ads:adUnitId="@string/banner_id_release1"/>-->
+         ads:adUnitId="@string/banner_id_release1"/>
 
-     <LinearLayout
+     <!--<LinearLayout
          android:id="@+id/layoutAD"
          android:layout_width="0dp"
          android:layout_height="0dp"
@@ -157,5 +157,5 @@
                    android:textColor="@android:color/white"
                    android:text="@string/btn_exit"/>
           </LinearLayout>
-     </LinearLayout>
+     </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

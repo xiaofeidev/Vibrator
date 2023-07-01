@@ -92,11 +92,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    var adShowing = false
-    var adLoaded = false
+//    var adShowing = false
+//    var adLoaded = false
     val onBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            if (mPurchaseStatus != PurchaseStatus.BOUGHT && App.adState == AdapterStatus.State.READY && !adShowing){
+            /*if (mPurchaseStatus != PurchaseStatus.BOUGHT && App.adState == AdapterStatus.State.READY && !adShowing){
                 // 展示广告
                 adShowing = true
                 layoutAD.visibility = VISIBLE
@@ -116,7 +116,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
+            }*/
+
+            //退出程序
+            if (mVibratorUtil?.isVibrate?:false) {
+                isInApp = false
+                mVibratorUtil?.stopVibrate()
+                textAction.setText(R.string.start_vibrate)
+                setBottomBarVisibility()
+                mAnimator?.cancel()
             }
+            isEnabled = false
+            onBackPressedDispatcher.onBackPressed()
 
             /*if (mPurchaseStatus != PurchaseStatus.BOUGHT && mInterstitialAd != null && !isShowed) {
                 //展示广告
@@ -255,7 +266,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdFailedToLoad(adError : LoadAdError) {
                 // Code to be executed when an ad request fails.
-                adLoaded = false
+                //adLoaded = false
             }
 
             override fun onAdImpression() {
@@ -265,7 +276,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
-                adLoaded = true
+                //adLoaded = true
             }
 
             override fun onAdOpened() {
@@ -279,12 +290,12 @@ class MainActivity : AppCompatActivity() {
                 it.adapterStatusMap.get(MobileAds::class.qualifiedName)?.initializationState?.let {
                     App.adState = it
                     loadAd()
-                    adView.pause()
+                    //adView.pause()
                 }
             }
         } else {
             loadAd()
-            adView.pause()
+            //adView.pause()
         }
     }
 
@@ -297,11 +308,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun destroyAdView() {
-//        if (adView != null && !isAdViewDestroyed) {
-//            adView.visibility = GONE
-//            adView.destroy()
-//            isAdViewDestroyed = true
-//        }
+        if (adView != null && !isAdViewDestroyed) {
+            adView.visibility = View.GONE
+            adView.destroy()
+            isAdViewDestroyed = true
+        }
     }
 
     override fun onDestroy() {
@@ -475,7 +486,7 @@ class MainActivity : AppCompatActivity() {
         mAnimator = AnimatorInflater.loadAnimator(this@MainActivity, R.animator.anim_vibrate)
         mAnimator?.setTarget(textAction)
 
-        btnExit.setOnClickListener {
+        /*btnExit.setOnClickListener {
             onBackPressedCallback.isEnabled = false
             onBackPressedDispatcher.onBackPressed()
         }
@@ -486,7 +497,7 @@ class MainActivity : AppCompatActivity() {
             }
             adShowing = false
             layoutAD.visibility = INVISIBLE
-        }
+        }*/
     }
 
     private fun setBottomBarVisibility() {
