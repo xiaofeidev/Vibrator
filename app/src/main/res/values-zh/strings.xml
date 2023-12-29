@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Vibrator</string>
+    <string name="app_version">Vibrator V%1$s</string>
+    <string name="start_vibrate">点击屏幕开始震动</string>
+    <string name="stop_vibrate">点击屏幕停止震动</string>
+
+    <string name="remote_start_vibrate">点击开始震动</string>
+    <string name="remote_stop_vibrate">点击停止震动</string>
+
+    <string name="keep">持续振动</string>
+    <string name="theme">主题</string>
+    <string name="discover">发现</string>
+    <string name="more">关于</string>
+
+    <string name="magenta">基佬紫</string>
+    <string name="red">初夜红</string>
+    <string name="pink">木耳粉</string>
+    <string name="yellow">吸土黄</string>
+    <string name="green">原谅绿</string>
+    <string name="blue">胖次蓝</string>
+    <string name="black">下体黑</string>
+    
+    <string name="not_allow">震动期间不允许切换主题</string>
+
+    <string name="bottom_bar_left">频率</string>
+    <string name="bottom_bar_right">高</string>
+
+    <string name="close">取消</string>
+
+    <string name="aboutDeveloper">作者：github @xiaofeidev</string>
+    <string name="aboutXBB_Title">关于本应用：</string>
+
+    <string name="aboutXBB_OpenSource">
+        ▶ 本应用已开源，点此访问<a href="">APP源码</a>。
+    </string>
+    <string name="aboutXBB_ScoreAndFeedback">
+        ▶ 想对作者说点什么，点此<a href="">评分或反馈</a>。
+    </string>
+    <string name="aboutXBB_Donate">
+        ▶ 非常喜欢本应用，也可以<a href="">捐赠</a>一下作者。
+    </string>
+
+    <string name="openSourceLink">https://github.com/xiaofeidev/Vibrator</string>
+    <string name="donateToast">十分感谢！作者支付宝账号(微信同)已复制到剪贴板</string>
+    <string name="alipay">15853186920</string>
+
+    <string name="about">关于</string>
+</resources>
