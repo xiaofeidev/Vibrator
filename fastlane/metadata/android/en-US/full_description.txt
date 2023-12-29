@@ -1,0 +1,7 @@
+massage function by calling the vibration motor of the mobile phone
+
+* Adjust the vibration frequency at will
+* Uninterrupted continuous vibration
+* Lock screen keep vibrating
+* Control the vibration through the notification bar
+* The application interface is simple and intuitive, with built-in colourful themes for switching
