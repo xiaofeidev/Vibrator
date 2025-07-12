@@ -52,6 +52,8 @@
 
     <string name="hint_keep">keep</string>
 
+<!--    <string name="billing_connect_failed">Failed to connect to billing service, please try again.</string>-->
+
     <string name="banner_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_id_release1" translatable="false">ca-app-pub-9708198084566779/3296344656</string>
     <string name="banner_id_release2" translatable="false">ca-app-pub-9708198084566779/1845577908</string>
