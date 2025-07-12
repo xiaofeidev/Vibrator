@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 def app = rootProject.ext.android
 
@@ -12,7 +12,8 @@ try {
 }
 
 android {
-    compileSdkVersion app.compileSdkVersion
+    namespace "com.github.xiaofei_dev.vibrator"
+    compileSdk 35
     defaultConfig {
         applicationId app.appId
         minSdkVersion app.minSdkVersion
@@ -21,6 +22,7 @@ android {
         versionName app.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
 
         if (!localProperties['base64EncodedPublicKey']) {
             logger.warn('base64EncodedPublicKey must be set for signature verification. ' +
@@ -49,40 +51,49 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
-            zipAlignEnabled false
+            //zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled true //是否混淆
             shrinkResources true //是否去除无效的资源文件
-            zipAlignEnabled true// Zipalign优化
+            //zipAlignEnabled true// Zipalign优化，已自动支持
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    buildToolsVersion '35.0.0'
+
+    buildFeatures {
+        buildConfig true
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.12.0'
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Anko （Kotlin 库）
-    implementation "org.jetbrains.anko:anko-common:$anko_version"
+//    implementation "org.jetbrains.anko:anko-common:$anko_version"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.1'
 
-    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'com.google.android.gms:play-services-ads:24.4.0'
 
     //play 支付相关依赖
-    def billing_version = "5.1.0"
+    def billing_version = "8.0.0"
     implementation "com.android.billingclient:billing:$billing_version"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
 }

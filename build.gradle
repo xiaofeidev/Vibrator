@@ -1,19 +1,28 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply from: 'config.gradle'
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '2.1.20'
     ext.anko_version = '0.10.8'
     repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
 		//阿里云镜像
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://jitpack.io' }
+//        maven { url 'https://maven.aliyun.com/repository/public/' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+//        maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.11.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -23,13 +32,22 @@ buildscript {
 
 allprojects {
     repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
         //阿里云镜像
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://jitpack.io' }
+//        maven { url 'https://maven.aliyun.com/repository/public/' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+//        maven { url 'https://jitpack.io' }
     }
 }
 

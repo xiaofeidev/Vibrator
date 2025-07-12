@@ -38,13 +38,30 @@ class VibratorUtil(private val mVibrator: Vibrator) {
     fun vibrate(mode: Int) {
         Log.d(TAG, "vibrate:0 ")
         isVibrate = true
-        when (mode) {
-            INTERRUPT ->
-                //适配在高版本系统上无法后台震动的问题
-                mVibrator.vibrate(mPattern, 0, mAudioAttributes)
-            KEEP ->
-                //适配在高版本系统上无法后台震动的问题
-                mVibrator.vibrate(mPatternKeep, 0, mAudioAttributes)
+        val pattern = if (mode == INTERRUPT) mPattern else mPatternKeep
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API 26+
+            val effect = android.os.VibrationEffect.createWaveform(pattern, 0)
+
+            when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> { // API 33+
+                    val attributes = android.os.VibrationAttributes.Builder()
+                        .setUsage(android.os.VibrationAttributes.USAGE_ALARM)
+                        .build()
+                    mVibrator.vibrate(effect, attributes)
+                }
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> { // API 29-32
+                    @Suppress("DEPRECATION")
+                    mVibrator.vibrate(effect, mAudioAttributes)
+                }
+                else -> { // API 26-28
+                    @Suppress("DEPRECATION")
+                    mVibrator.vibrate(effect)
+                }
+            }
+        } else { // Below API 26
+            @Suppress("DEPRECATION")
+            mVibrator.vibrate(pattern, 0)
         }
     }
 

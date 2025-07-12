@@ -17,26 +17,39 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.AdapterStatus
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.activity_about.adView
-import kotlinx.android.synthetic.main.activity_about.toolbar
-import org.jetbrains.anko.find
+// 取消 Kotlin synthetic 导入，改用 findViewById
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import com.google.android.gms.ads.AdView
+//import org.jetbrains.anko.find
 
 class AboutActivity : AppCompatActivity(),
         View.OnClickListener {
+
+    // 使用 lateinit 保存视图引用，替代 Kotlin synthetic
+    private lateinit var toolbar: Toolbar
+    private lateinit var adView: AdView
+    private lateinit var textVersion: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme()
         setContentView(R.layout.activity_about)
+
+        // 通过 findViewById 初始化视图
+        toolbar = findViewById(R.id.toolbar)
+        adView = findViewById(R.id.adView)
+        textVersion = findViewById(R.id.textVersion)
+
         initAd()
         setSupportActionBar(toolbar)
         //toolbar.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //find<View>(R.id.itemOpenSource).setOnClickListener(this)
-        find<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
+        findViewById<View>(R.id.itemScoreAndFeedback).setOnClickListener(this)
         //find<View>(R.id.itemDonate).setOnClickListener(this)
-        textVersion.setText(getString(R.string.app_version, getPackageVersion(this)))
+        textVersion.text = getString(R.string.app_version, getPackageVersion(this))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
