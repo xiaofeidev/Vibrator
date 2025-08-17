@@ -200,17 +200,17 @@ class MainActivity : AppCompatActivity() {
         filter.addAction("com.github.xiaofei_dev.vibrator.close")
         mMyRecever = MyReceiver()
         // RemoteViews 中的 PendingIntent 由系统进程触发，属于跨进程广播，
-        // 因此需要使用 RECEIVER_EXPORTED 才能在 Android 13+ 正常接收
-        val receiverFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.RECEIVER_EXPORTED
-        } else {
-            0 // 旧版本没有 flag 概念
-        }
+        // 因此需要使用 RECEIVER_EXPORTED 才能在 Android 13+ 正常接收。
+        // 注意：ContextCompat.registerReceiver 在所有系统版本都会强制要求提供
+        // RECEIVER_EXPORTED 或 RECEIVER_NOT_EXPORTED 之一；低版本会忽略该值但不能为 0，
+        // 否则会抛出 IllegalArgumentException。
+        val receiverFlags = ContextCompat.RECEIVER_EXPORTED
+//        val receiverFlags = 0
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
 //            // TIRAMISU 及以上可直接使用 3 参数版本，但为统一写法，此处改用 ContextCompat.registerReceiver
 //        }
 
-        // 始终通过 ContextCompat.registerReceiver 提供 flags，避免 lint 检查
+        // 始终通过 ContextCompat.registerReceiver 提供 flags，避免崩溃与 lint 检查
         ContextCompat.registerReceiver(this, mMyRecever, filter, receiverFlags)
 
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -220,6 +220,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         // onResume 是同步购买状态的最佳时机，因为它覆盖了启动和从后台返回两种场景
         syncPurchaseStatus()
+//        throw Exception("test")
     }
 
     //检查用户的应用内购状态

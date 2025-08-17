@@ -1,5 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+
 apply from: 'config.gradle'
+
 buildscript {
     ext.kotlin_version = '2.1.20'
     ext.anko_version = '0.10.8'
@@ -24,11 +27,17 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.11.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Add the dependency for the Google services Gradle plugin
+        classpath 'com.google.gms:google-services:4.4.3'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.5'
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+
 
 allprojects {
     repositories {
@@ -50,6 +59,8 @@ allprojects {
 //        maven { url 'https://jitpack.io' }
     }
 }
+
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

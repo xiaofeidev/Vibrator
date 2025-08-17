@@ -82,7 +82,7 @@
 ## -keep class com.google.android.gms.ads.** {*;}
 -keep class com.google.android.gms.ads.MobileAds
 ## play 结算服务
-#-keep class com.android.billingclient.*
+-keep class com.android.billingclient.*
 
 ## 保留继承的
 -keep public class * extends android.support.v4.**
